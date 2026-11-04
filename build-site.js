@@ -26,13 +26,25 @@ const SITE = {
   noindex: true, // demo: flip to false when the site goes live
 };
 
-const PRICE = { les: 120, pakLes: 115 };
+// les = losse les van 45 min. Pakketlessen zijn 90 min: los €120, in een pakket €115.
+// examen: losse waarde van het praktijkexamen. null = nog onbekend, dan staat er "+ examen".
+const PRICE = { les: 60, les90: 120, pakLes: 115, proef: 60, examen: null };
 const PACKS = [
-  { id: 'start', name: 'Start', lessen: 15, prijs: 1725, van: 1800, korting: 75, sub: 'Voor wie al wat gevoel heeft in de auto' },
-  { id: 'compleet', name: 'Compleet', lessen: 20, prijs: 2300, van: 2400, korting: 100, pop: true, sub: 'De meeste leerlingen hebben dit nodig' },
-  { id: 'zeker', name: 'Zeker Slagen', lessen: 30, prijs: 3450, van: 3600, korting: 150, sub: 'Volledig traject, ook bij faalangst' },
+  { id: 'start', name: 'Start', lessen: 15, sub: 'Voor wie al wat gevoel heeft in de auto' },
+  { id: 'compleet', name: 'Compleet', lessen: 20, pop: true, sub: 'De meeste leerlingen hebben dit nodig' },
+  { id: 'zeker', name: 'Zeker Slagen', lessen: 30, sub: 'Volledig traject, ook bij faalangst' },
 ];
 const eur = n => '€' + n.toLocaleString('nl-NL');
+const exam = PRICE.examen;
+PACKS.forEach(p => {
+  p.prijs = p.lessen * PRICE.pakLes;
+  p.korting = p.lessen * (PRICE.les90 - PRICE.pakLes);
+  p.van = p.lessen * PRICE.les90 + PRICE.proef + (exam || 0);
+  p.voordeel = p.korting + PRICE.proef + (exam || 0);
+  p.vanTxt = eur(p.van) + (exam == null ? ' + examen' : '');
+  p.voordeelTxt = eur(p.voordeel) + (exam == null ? ' + gratis examen' : '');
+});
+const examTxt = exam == null ? 'Gratis (prijs volgt)' : eur(exam);
 
 /* ---------- icons ---------- */
 const P = {
@@ -72,7 +84,7 @@ const SERVICES = [
     signalsTitle: 'Is automaat iets voor jou?',
     signals: ['Je wilt zo snel mogelijk je rijbewijs halen', 'Koppelen en schakelen geven je stress of faalangst', 'Je gaat later toch in een automaat of elektrische auto rijden'],
     krijgt: [
-      ['Lessen van 90 minuten', 'Genoeg tijd om iets nieuws te leren en het meteen goed te oefenen.'],
+      ['Lessen van 90 minuten', 'In een pakket: genoeg tijd om iets nieuws te leren en het meteen goed te oefenen.'],
       ['Een plan per les', 'Je weet altijd waar je staat en wat de volgende stap naar je examen is.'],
       ['Ophalen in de regio', 'Thuis, op school of op het station in Rhoon, Rotterdam en omgeving.'],
       ['Examen inbegrepen', 'Kies je een pakket, dan zit je praktijkexamen er al bij.'],
@@ -80,7 +92,7 @@ const SERVICES = [
     faq: [
       ['Hoeveel lessen heb ik nodig in een automaat?', 'Dat verschilt per persoon. Gemiddeld heb je in een automaat minder lessen nodig dan in een schakelauto. Na je proefles krijg je een eerlijk advies.'],
       ['Mag ik met een automaatrijbewijs in een schakelauto rijden?', 'Nee. Haal je je rijbewijs in een automaat (code 78), dan mag je alleen in een automaat rijden. Wil je later toch schakelen, dan kun je daarvoor apart examen doen.'],
-      ['Wat kost rijles in een automaat?', `Een losse les van 90 minuten kost ${eur(PRICE.les)}. Met een pakket betaal je ${eur(PRICE.pakLes)} per les en is je praktijkexamen inbegrepen.`],
+      ['Wat kost rijles in een automaat?', `Een losse les van 45 minuten kost ${eur(PRICE.les)}. In een pakket rijd je lessen van 90 minuten voor ${eur(PRICE.pakLes)} per les en is je praktijkexamen inbegrepen.`],
     ],
     related: ['rijles-schakel', 'rijles-faalangst', 'spoedcursus'],
   },
@@ -105,7 +117,7 @@ const SERVICES = [
     faq: [
       ['Is schakelen moeilijk?', 'In het begin is het even wennen. Met rustige uitleg en genoeg herhaling gaat het na een paar lessen vanzelf.'],
       ['Kan ik later overstappen naar automaat?', 'Ja. Merk je dat schakelen je tegenhoudt, dan kun je overstappen naar de automaat. We bespreken dat samen, zonder druk.'],
-      ['Wat kost rijles in een schakelauto?', `Hetzelfde als in de automaat: ${eur(PRICE.les)} per losse les van 90 minuten, of ${eur(PRICE.pakLes)} per les in een pakket met examen inbegrepen.`],
+      ['Wat kost rijles in een schakelauto?', `Hetzelfde als in de automaat: ${eur(PRICE.les)} per losse les van 45 minuten, of ${eur(PRICE.pakLes)} per les in een pakket met examen inbegrepen.`],
     ],
     related: ['rijles-automaat', 'opfriscursus', 'rijles-vanaf-16-5-jaar'],
   },
@@ -169,7 +181,7 @@ const SERVICES = [
     intro: 'Wel een rijbewijs, maar al lang niet gereden? Met een paar opfrislessen ben je weer helemaal bij en rijd je met vertrouwen door Rotterdam en omgeving.',
     about: [
       'Veel mensen halen hun rijbewijs en rijden daarna jaren niet. Of ze komen uit het buitenland en moeten wennen aan het Nederlandse verkeer: fietsers overal, voorrang van rechts, rotondes en trams. Na een tijdje voelt de auto dan vreemd en spannend.',
-      'In een opfriscursus kijken we eerst waar je staat. Daarna oefenen we precies wat jij nodig hebt, of dat nu de snelweg is, parkeren of de drukte in de stad. De lessen duren net als gewone rijlessen 90 minuten.',
+      'In een opfriscursus kijken we eerst waar je staat. Daarna oefenen we precies wat jij nodig hebt, of dat nu de snelweg is, parkeren of de drukte in de stad. Een losse les duurt 45 minuten, dus je neemt precies zoveel als je nodig hebt.',
     ],
     signalsTitle: 'Herken je dit?',
     signals: ['Je hebt je rijbewijs maar rijdt al jaren niet', 'Je bent net in Nederland en moet wennen aan de regels', 'Je wilt weer zelfstandig rijden, voor werk of gezin'],
@@ -182,7 +194,7 @@ const SERVICES = [
     faq: [
       ['Hoeveel opfrislessen heb ik nodig?', 'Dat hangt af van hoe lang je niet hebt gereden. Vaak zijn een paar lessen genoeg. Na de eerste les weet je wat we adviseren.'],
       ['Kan ik kiezen tussen automaat en schakel?', 'Ja, je kiest zelf in welke auto je de opfrislessen volgt.'],
-      ['Wat kost een opfrisles?', `Een losse les van 90 minuten kost ${eur(PRICE.les)}.`],
+      ['Wat kost een opfrisles?', `Een losse les van 45 minuten kost ${eur(PRICE.les)}.`],
     ],
     related: ['rijangst', 'driving-lessons-english', 'rijles-automaat'],
   },
@@ -207,7 +219,7 @@ const SERVICES = [
     faq: [
       ['Hoe snel kan ik examen doen?', 'Dat hangt af van je niveau en van de beschikbaarheid bij het CBR. Na de proefles maken we een realistische planning.'],
       ['Moet ik mijn theorie al hebben?', 'Voor je praktijkexamen moet je theorie gehaald zijn. Beginnen met lessen kan al terwijl je de theorie leert.'],
-      ['Wat kost een spoedcursus?', `Je betaalt gewoon per les: ${eur(PRICE.les)} per losse les, of ${eur(PRICE.pakLes)} per les in een pakket met examen inbegrepen.`],
+      ['Wat kost een spoedcursus?', `Je betaalt gewoon per les: ${eur(PRICE.les)} per losse les van 45 minuten, of ${eur(PRICE.pakLes)} per les in een pakket met examen inbegrepen.`],
     ],
     related: ['rijles-automaat', 'proefles', 'tarieven'],
   },
@@ -220,7 +232,7 @@ const SERVICES = [
     intro: 'New to the Netherlands? Take your driving lessons fully in English, in an automatic or a manual car. Clear explanations, a plan for every lesson and a calm instructor.',
     about: [
       'Learning to drive in a new country is a lot at once: different rules, cyclists everywhere, trams and priority to traffic from the right. Doing all that in a language you are still learning makes it harder than it needs to be. At Rijschool 010 every lesson is in English, so you can focus on the road.',
-      'We prepare you for exactly what the CBR examiner expects on your practical exam, and help you with the planning around it. Your lessons last 90 minutes, which gives you time to practise properly instead of rushing.',
+      'We prepare you for exactly what the CBR examiner expects on your practical exam, and help you with the planning around it. Single lessons last 45 minutes. In a package you drive 90 minute lessons, which gives you time to practise properly instead of rushing.',
     ],
     signalsTitle: 'Is this you?',
     signals: ['You moved to the Netherlands and need a Dutch driving licence', 'Your foreign licence cannot be exchanged', 'You prefer clear instructions in English'],
@@ -232,7 +244,7 @@ const SERVICES = [
     ],
     review: ['Martin O.', 'Highly recommend Rijschool 010. Was able to take great driving lessons in English which helped me pass my exam in one try. Each lesson has a plan to help you be prepared for the exam, which I really appreciated.'],
     faq: [
-      ['How much does a lesson cost?', `A single 90 minute lesson costs ${eur(PRICE.les)}. With a package you pay ${eur(PRICE.pakLes)} per lesson and your practical exam is included.`],
+      ['How much does a lesson cost?', `A single 45 minute lesson costs ${eur(PRICE.les)}. With a package you pay ${eur(PRICE.pakLes)} per lesson and your practical exam is included.`],
       ['Can I choose automatic or manual?', 'Yes, both are available in English.'],
       ['Where do you give lessons?', 'In Rhoon, Rotterdam, Barendrecht, Schiedam, Vlaardingen, Maassluis and Maasland. Outside this area we can meet at a station in our region.'],
     ],
@@ -265,18 +277,18 @@ const SERVICES = [
   },
   {
     slug: 'proefles', name: 'Gratis proefles', icon: 'flag', img: 'g16',
-    short: '50 minuten kennismaken, gratis bij een pakket.',
-    title: 'Gratis proefles van 50 minuten',
-    h1: 'Gratis proefles. <span class="grad-text">50 minuten kennismaken.</span>',
+    short: '45 minuten kennismaken, gratis bij een pakket.',
+    title: 'Gratis proefles van 45 minuten',
+    h1: 'Gratis proefles. <span class="grad-text">45 minuten kennismaken.</span>',
     intro: 'Maak kennis met je instructeur en de lesauto. Na de proefles weet je waar je staat en hoeveel lessen we adviseren. Bij elk pakket is de proefles gratis.',
     about: [
-      'In de proefles van 50 minuten rijd je meteen zelf. We kijken wat je al kunt, hoe je reageert in het verkeer en waar je je nog onzeker over voelt. Heb je nog nooit gereden? Dan beginnen we rustig met de basis.',
+      'In de proefles van 45 minuten rijd je meteen zelf. We kijken wat je al kunt, hoe je reageert in het verkeer en waar je je nog onzeker over voelt. Heb je nog nooit gereden? Dan beginnen we rustig met de basis.',
       'Na afloop krijg je een eerlijk advies over het aantal lessen, en of automaat of schakel beter bij je past. Na het inplannen krijg je een Tikkie-betaalverzoek. Zodra dat binnen 24 uur betaald is, staat je afspraak vast. Kies je daarna voor een pakket, dan is de proefles gratis.',
     ],
     signalsTitle: 'Na de proefles weet je',
     signals: ['Hoe de lesauto werkt en hoe het voelt om zelf te rijden', 'Waar je nu staat', 'Hoeveel lessen we je adviseren'],
     krijgt: [
-      ['50 minuten zelf rijden', 'Geen praatje vooraf van een half uur, je gaat gewoon de weg op.'],
+      ['45 minuten zelf rijden', 'Geen praatje vooraf van een half uur, je gaat gewoon de weg op.'],
       ['Eerlijk advies', 'Over het aantal lessen en automaat of schakel.'],
       ['Kies je instructeur', 'Ook de proefles kan met onze vrouwelijke instructrice.'],
       ['Gratis bij een pakket', 'Kies je voor een pakket, dan betaal je de proefles niet.'],
@@ -432,7 +444,7 @@ function faqHtml(items, { title = 'Veelgestelde vragen', eyebrow = 'Goed om te w
 </section>`;
 }
 
-function ctaBand({ title = 'Klaar om te beginnen?', text = 'Plan je proefles van 50 minuten. Bij elk pakket is die gratis, en je praktijkexamen zit erbij.', primary = ['Plan je gratis proefles', '/contact/'], en = false } = {}) {
+function ctaBand({ title = 'Klaar om te beginnen?', text = 'Plan je proefles van 45 minuten. Bij elk pakket is die gratis, en je praktijkexamen zit erbij.', primary = ['Plan je gratis proefles', '/contact/'], en = false } = {}) {
   return `<section class="tight">
   <div class="wrap">
     <div class="cta-band rv s">
@@ -452,11 +464,12 @@ function reviewCards(list) {
 
 function pricingSection({ cls = '', heading = true } = {}) {
   const packs = PACKS.map(p => `<div class="pack${p.pop ? ' pop' : ''} rv">
-        <h4>${p.name}</h4><span class="sub">${p.lessen} lessen van 90 min · ${p.lessen * 2} × 45 min</span>
-        <div class="was">${eur(p.van)}</div>
+        <h4>${p.name}</h4><span class="sub">${p.lessen} lessen van 90 minuten</span>
+        <div class="was"><s>${p.vanTxt}</s></div>
+        <span class="was-note">Los: lessen, proefles en examen</span>
         <div class="p">${eur(p.prijs)}</div>
-        <span class="save">${eur(p.korting)} korting + examen inbegrepen</span>
-        <ul><li>${p.lessen} × 90 minuten rijles</li><li>${eur(PRICE.pakLes)} per les in plaats van ${eur(PRICE.les)}</li><li class="exam">Praktijkexamen inbegrepen</li><li class="gift">Gratis proefles (50 min)</li><li>Automaat of schakel</li></ul>
+        <span class="save">Jouw voordeel: ${p.voordeelTxt}</span>
+        <ul><li>${p.lessen} × 90 minuten rijles</li><li>${eur(PRICE.pakLes)} per les (los ${eur(PRICE.les90)})</li><li class="exam">Praktijkexamen inbegrepen</li><li class="gift">Gratis proefles (45 min, t.w.v. ${eur(PRICE.proef)})</li><li>Automaat of schakel</li></ul>
         <a href="/contact/?pakket=${p.id}" class="btn ${p.pop ? 'btn-primary' : 'btn-ghost'}">Kies ${p.name}</a>
       </div>`).join('\n      ');
   return `<section id="tarieven" class="${cls}">
@@ -464,27 +477,27 @@ function pricingSection({ cls = '', heading = true } = {}) {
     ${heading ? `<div class="center">
       <span class="eyebrow rv">Tarieven</span>
       <h2 class="h2 rv">Eerlijke prijzen,<br><span class="grad-text">examen inbegrepen.</span></h2>
-      <p class="lead rv">Automaat en schakel hebben hetzelfde tarief. Met een pakket betaal je ${eur(PRICE.pakLes)} per les, zit je praktijkexamen erbij en is je proefles gratis.</p>
+      <p class="lead rv">Losse lessen van 45 minuten voor ${eur(PRICE.les)}, of een pakket met lessen van 90 minuten. In een pakket zit je praktijkexamen erbij en is je proefles gratis.</p>
     </div>` : ''}
     <div class="price-top">
       <div class="price-card rv l">
         <div class="lbl">🚗 Losse rijles</div>
         <div class="amt">${eur(PRICE.les)}<small> / les</small></div>
-        <span class="dur">⏱ 90 minuten</span>
-        <p>Een volle les van anderhalf uur. Genoeg tijd om echt iets nieuws te leren en het meteen te oefenen. Ideaal voor een opfriscursus.</p>
+        <span class="dur">⏱ 45 minuten</span>
+        <p>Een losse les van 45 minuten, in de automaat of de schakelauto. Handig voor een opfrisles. Rijd je vaker, dan is een pakket met lessen van 90 minuten voordeliger.</p>
       </div>
       <div class="price-card free rv r">
         <div class="shine"></div>
         <div class="lbl">🎁 Proefles</div>
         <div class="amt">Gratis<small> bij elk pakket</small></div>
-        <span class="dur">⏱ 50 minuten</span>
-        <p>Maak kennis met je instructeur en de auto. We kijken wat je al kunt en geven een eerlijk advies over het aantal lessen.</p>
+        <span class="dur">⏱ 45 minuten</span>
+        <p>Maak kennis met je instructeur en de auto. We kijken wat je al kunt en geven een eerlijk advies. Zonder pakket kost de proefles ${eur(PRICE.proef)}.</p>
       </div>
     </div>
     <div class="pack-grid">
       ${packs}
     </div>
-    <p class="note rv">In elk pakket betaal je ${eur(PRICE.pakLes)} per les van 90 minuten en is je praktijkexamen bij het CBR inbegrepen.</p>
+    <p class="note rv">In elk pakket rijd je lessen van 90 minuten voor ${eur(PRICE.pakLes)} per les (los ${eur(PRICE.les90)}), is je praktijkexamen bij het CBR inbegrepen en is de proefles gratis.</p>
   </div>
 </section>`;
 }
@@ -608,8 +621,8 @@ for (const s of SERVICES) {
   const en = s.lang === 'en';
   const crumbs = [['Home', '/'], [en ? 'Driving lessons' : 'Rijlessen', '/#lessen'], [s.name, `/${s.slug}/`]];
   const L = en
-    ? { what: 'What to expect', get: 'What you get', getH: 'Everything to pass <span class="grad-text">with confidence.</span>', price: 'Prices', priceH: 'Clear prices, <span class="grad-text">exam included.</span>', single: 'Single lesson (90 min)', pack: 'Per lesson in a package', trial: 'Trial lesson (50 min)', free: 'Free', freeSub: 'with every package', perPack: 'incl. practical exam', more: 'See all packages', rel: 'Related', relH: 'You might also like', cta: 'Ready to start?', ctaT: 'Book your 50 minute trial lesson. Free with every package, and your practical exam is included.', ctaB: 'Book a trial lesson', faqT: 'Frequently asked questions', faqE: 'Good to know', ask: 'Ask your question', reviewE: 'Google review' }
-    : { what: 'Wat is het', get: 'Wat je krijgt', getH: 'Alles om <span class="grad-text">met vertrouwen</span> te slagen.', price: 'Prijzen', priceH: 'Duidelijke prijzen, <span class="grad-text">examen inbegrepen.</span>', single: 'Losse les (90 min)', pack: 'Per les in een pakket', trial: 'Proefles (50 min)', free: 'Gratis', freeSub: 'bij elk pakket', perPack: 'inclusief praktijkexamen', more: 'Bekijk alle pakketten', rel: 'Gerelateerd', relH: 'Dit vind je misschien ook interessant', cta: 'Klaar om te beginnen?', ctaT: undefined, ctaB: 'Plan je gratis proefles', faqT: 'Veelgestelde vragen', faqE: 'Goed om te weten', ask: 'Stel je vraag', reviewE: 'Google review' };
+    ? { what: 'What to expect', get: 'What you get', getH: 'Everything to pass <span class="grad-text">with confidence.</span>', price: 'Prices', priceH: 'Clear prices, <span class="grad-text">exam included.</span>', single: 'Single lesson (45 min)', pack: 'Per 90 min lesson in a package', trial: 'Trial lesson (45 min)', free: 'Free', freeSub: 'with every package', perPack: 'incl. practical exam', more: 'See all packages', rel: 'Related', relH: 'You might also like', cta: 'Ready to start?', ctaT: 'Book your 45 minute trial lesson. Free with every package, and your practical exam is included.', ctaB: 'Book a trial lesson', faqT: 'Frequently asked questions', faqE: 'Good to know', ask: 'Ask your question', reviewE: 'Google review' }
+    : { what: 'Wat is het', get: 'Wat je krijgt', getH: 'Alles om <span class="grad-text">met vertrouwen</span> te slagen.', price: 'Prijzen', priceH: 'Duidelijke prijzen, <span class="grad-text">examen inbegrepen.</span>', single: 'Losse les (45 min)', pack: 'Per les van 90 min in een pakket', trial: 'Proefles (45 min)', free: 'Gratis', freeSub: 'bij elk pakket', perPack: 'inclusief praktijkexamen', more: 'Bekijk alle pakketten', rel: 'Gerelateerd', relH: 'Dit vind je misschien ook interessant', cta: 'Klaar om te beginnen?', ctaT: undefined, ctaB: 'Plan je gratis proefles', faqT: 'Veelgestelde vragen', faqE: 'Goed om te weten', ask: 'Stel je vraag', reviewE: 'Google review' };
   const body = `${pageHero({
     eyebrow: s.eyebrow || s.name, h1: s.h1, lead: s.intro, crumbs, img: s.img, card: true,
     ctas: `<a href="/contact/" class="btn btn-primary magnetic">${L.ctaB} ${ARROW}</a><a href="${SITE.wa}" target="_blank" rel="noopener" class="btn btn-ghost magnetic">WhatsApp</a>`,
@@ -666,13 +679,13 @@ for (const l of LOCATIONS) {
   const crumbs = [['Home', '/'], ['Werkgebied', '/werkgebied/'], [`Rijschool ${l.name}`, `/rijschool-${l.slug}/`]];
   const faq = [
     [`Geven jullie rijles in ${l.name}?`, `Ja. We halen je op in ${l.name}: thuis, op school, op je werk of bij het station.`],
-    [`Wat kost rijles in ${l.name}?`, `Een losse les van 90 minuten kost ${eur(PRICE.les)}. Met een pakket betaal je ${eur(PRICE.pakLes)} per les en is je praktijkexamen inbegrepen.`],
+    [`Wat kost rijles in ${l.name}?`, `Een losse les van 45 minuten kost ${eur(PRICE.les)}. In een pakket rijd je lessen van 90 minuten voor ${eur(PRICE.pakLes)} per les en is je praktijkexamen inbegrepen.`],
     [`Kan ik in ${l.name} les krijgen van een vrouwelijke instructrice?`, 'Ja. Geef het aan bij je aanmelding, dan plannen we je lessen met haar in.'],
     ['Geven jullie les in een automaat en een schakelauto?', 'Ja, je kiest zelf. Het tarief is voor beide hetzelfde.'],
   ];
   const body = `${pageHero({
     h1: `Rijschool in ${l.name}. <span class="grad-text">Automaat en schakel.</span>`,
-    lead: `${l.local} We halen je op en brengen je weer terug, en elke les duurt 90 minuten.`, crumbs, img: l.img, card: true,
+    lead: `${l.local} We halen je op en brengen je weer terug.`, crumbs, img: l.img, card: true,
   })}
 <section class="alt">
   <div class="wrap">
@@ -692,7 +705,7 @@ for (const l of LOCATIONS) {
     <div class="stat-grid" style="grid-template-columns:1fr 1fr">
       <div class="stat rv"><div class="num">${SITE.rating}</div><p>Score op Google</p></div>
       <div class="stat rv"><div class="num">${SITE.since}</div><p>Sinds dit jaar actief</p></div>
-      <div class="stat rv"><div class="num">90<small style="font-size:1.1rem"> min</small></div><p>Per les</p></div>
+      <div class="stat rv"><div class="num">90<small style="font-size:1.1rem"> min</small></div><p>Per les in een pakket</p></div>
       <div class="stat rv"><div class="num">${eur(PRICE.pakLes)}</div><p>Per les in een pakket</p></div>
     </div>
   </div>
@@ -705,7 +718,7 @@ for (const l of LOCATIONS) {
   </div>
 </section>
 ${faqHtml(faq)}
-${ctaBand({ title: `Rijles in ${l.name}?`, text: `Plan je proefles van 50 minuten. We halen je op in ${l.name}. Bij elk pakket is de proefles gratis en zit je examen erbij.` })}`;
+${ctaBand({ title: `Rijles in ${l.name}?`, text: `Plan je proefles van 45 minuten. We halen je op in ${l.name}. Bij elk pakket is de proefles gratis en zit je examen erbij.` })}`;
   page(`/rijschool-${l.slug}/`, { title: `Rijschool ${l.name} | Rijles automaat en schakel | Rijschool 010`, desc: `Rijles in ${l.name} bij Rijschool 010: automaat en schakel, lessen van 90 minuten, specialist in faalangst. Pakket met examen inbegrepen.`, body, crumbs, faq });
 }
 
@@ -713,23 +726,28 @@ ${ctaBand({ title: `Rijles in ${l.name}?`, text: `Plan je proefles van 50 minute
 {
   const crumbs = [['Home', '/'], ['Tarieven', '/tarieven/']];
   const faq = [
-    ['Wat kost een losse rijles?', `Een losse rijles van 90 minuten kost ${eur(PRICE.les)}, in de automaat en in de schakelauto.`],
-    ['Wat zit er in een pakket?', `Je lessen van 90 minuten voor ${eur(PRICE.pakLes)} per stuk, je praktijkexamen bij het CBR en een gratis proefles van 50 minuten.`],
+    ['Wat kost een losse rijles?', `Een losse rijles van 45 minuten kost ${eur(PRICE.les)}, in de automaat en in de schakelauto.`],
+    ['Wat zit er in een pakket?', `Je lessen van 90 minuten voor ${eur(PRICE.pakLes)} per stuk, je praktijkexamen bij het CBR en een gratis proefles van 45 minuten.`],
     ['Kan ik in termijnen betalen?', 'Ja. Je kunt je pakket in één keer betalen, in termijnen, of per les afrekenen.'],
-    ['Waarom lessen van 90 minuten?', 'In 90 minuten heb je tijd om iets nieuws te leren én het meteen goed te oefenen. Je rijdt meer en zit minder te wachten. Een pakket van 20 lessen van 90 minuten staat gelijk aan 40 lessen van 45 minuten.'],
+    ['Waarom lessen van 90 minuten?', 'In 90 minuten heb je tijd om iets nieuws te leren én het meteen goed te oefenen. Je rijdt meer en zit minder te wachten.'],
     ['Hoe bevestig ik een les?', 'Na het inplannen krijg je een Tikkie-betaalverzoek. Zodra dat binnen 24 uur betaald is, staat je afspraak vast.'],
   ];
   const rows = [
-    ['Lessen van 90 minuten', 'Per les', ...PACKS.map(p => String(p.lessen))],
-    ['Lessen van 45 minuten', 'Per les', ...PACKS.map(p => String(p.lessen * 2))],
-    ['Prijs per les (90 min)', eur(PRICE.les), ...PACKS.map(() => eur(PRICE.pakLes))],
-    ['Normale prijs', 'n.v.t.', ...PACKS.map(p => eur(p.van))],
+    ['Lesduur', '45 minuten', ...PACKS.map(() => '90 minuten')],
+    ['Aantal lessen', 'Zoveel je wilt', ...PACKS.map(p => String(p.lessen))],
+    ['Prijs per les', eur(PRICE.les), ...PACKS.map(() => eur(PRICE.pakLes))],
     ['Jij betaalt', 'Per les', ...PACKS.map(p => `<span class="hl">${eur(p.prijs)}</span>`)],
-    ['Korting op de lessen', 'Geen', ...PACKS.map(p => eur(p.korting))],
     ['Praktijkexamen', 'Apart', ...PACKS.map(() => '<span class="hl">Inbegrepen</span>')],
-    ['Proefles (50 min)', 'Apart', ...PACKS.map(() => 'Gratis')],
+    ['Proefles (45 min)', eur(PRICE.proef), ...PACKS.map(() => 'Gratis')],
   ];
-  const body = `${pageHero({ h1: 'Tarieven en pakketten. <span class="grad-text">Examen inbegrepen.</span>', lead: `Losse lessen of een pakket, in de automaat of de schakelauto. Met een pakket betaal je ${eur(PRICE.pakLes)} per les, is je praktijkexamen inbegrepen en is je proefles gratis.`, crumbs, ctas: false })}
+  const gain = [
+    ['Los zou je betalen', 'Wat je rijdt', ...PACKS.map(p => `<small>${p.lessen} × ${eur(PRICE.les90)} + proefles + examen</small><br><b>${p.vanTxt}</b>`)],
+    ['Jij betaalt', 'Per les', ...PACKS.map(p => `<b>${eur(p.prijs)}</b>`)],
+    [`Korting op de lessen (${eur(PRICE.les90 - PRICE.pakLes)} per les)`, 'Geen', ...PACKS.map(p => eur(p.korting))],
+    ['Gratis proefles', 'Geen', ...PACKS.map(() => eur(PRICE.proef))],
+    ['Praktijkexamen inbegrepen', 'Geen', ...PACKS.map(() => examTxt)],
+  ];
+  const body = `${pageHero({ h1: 'Tarieven en pakketten. <span class="grad-text">Examen inbegrepen.</span>', lead: `Losse lessen van 45 minuten voor ${eur(PRICE.les)}, of een pakket met lessen van 90 minuten. In een pakket is je praktijkexamen inbegrepen en is je proefles gratis.`, crumbs, ctas: false })}
 ${pricingSection({ heading: false, cls: '' }).replace('<section id="tarieven" class="">', '<section id="pakketten" style="padding-top:20px">')}
 <section class="alt">
   <div class="wrap">
@@ -738,6 +756,14 @@ ${pricingSection({ heading: false, cls: '' }).replace('<section id="tarieven" cl
     <div class="table-wrap rv"><table class="cmp">
       <thead><tr><th></th><th>Losse lessen</th>${PACKS.map(p => `<th>${p.name}</th>`).join('')}</tr></thead>
       <tbody>${rows.map(r => `<tr>${r.map(c => `<td>${c}</td>`).join('')}</tr>`).join('')}</tbody>
+    </table></div>
+    <div style="margin-top:70px"><span class="eyebrow rv">Jouw voordeel</span></div>
+    <h2 class="h2 rv">Wat je met een pakket<br><span class="grad-text">echt bespaart.</span></h2>
+    <p class="lead rv">Bij losse lessen betaal je puur wat je rijdt. In een pakket krijg je korting op elke les, een gratis proefles en je praktijkexamen erbij.</p>
+    <div class="table-wrap rv"><table class="cmp gain">
+      <thead><tr><th></th><th>Losse lessen</th>${PACKS.map(p => `<th>${p.name}</th>`).join('')}</tr></thead>
+      <tbody>${gain.map(r => `<tr>${r.map(c => `<td>${c}</td>`).join('')}</tr>`).join('')}</tbody>
+      <tfoot><tr><td>Totaal voordeel</td><td>Geen</td>${PACKS.map(p => `<td>${p.voordeelTxt}</td>`).join('')}</tr></tfoot>
     </table></div>
   </div>
 </section>
@@ -754,7 +780,7 @@ ${pricingSection({ heading: false, cls: '' }).replace('<section id="tarieven" cl
 </section>
 ${faqHtml(faq, { cls: 'alt' })}
 ${ctaBand()}`;
-  page('/tarieven/', { title: 'Tarieven en pakketten rijles | Rijschool 010', desc: `Rijles bij Rijschool 010: losse les van 90 minuten ${eur(PRICE.les)}. Pakketten vanaf ${eur(PACKS[0].prijs)} met praktijkexamen inbegrepen en gratis proefles.`, body, crumbs, faq });
+  page('/tarieven/', { title: 'Tarieven en pakketten rijles | Rijschool 010', desc: `Rijles bij Rijschool 010: losse les van 45 minuten ${eur(PRICE.les)}. Pakketten vanaf ${eur(PACKS[0].prijs)} met praktijkexamen inbegrepen en gratis proefles.`, body, crumbs, faq });
 }
 
 // Instructrice
@@ -763,7 +789,7 @@ ${ctaBand()}`;
   const faq = [
     ['Kan ik les krijgen van een vrouwelijke instructrice?', 'Ja. Kies bij je aanmelding voor de vrouwelijke instructrice, dan plannen we je proefles en lessen met haar in.'],
     ['Is ze niet te streng?', 'Ze is direct en ze legt de lat hoog. Maar ze staat aan jouw kant: ze wil dat je slaagt, en dat merk je in elke les.'],
-    ['Kost les bij haar meer?', `Nee. Je betaalt hetzelfde tarief: ${eur(PRICE.les)} per losse les of ${eur(PRICE.pakLes)} per les in een pakket met examen inbegrepen.`],
+    ['Kost les bij haar meer?', `Nee. Je betaalt hetzelfde tarief: ${eur(PRICE.les)} per losse les van 45 minuten, of ${eur(PRICE.pakLes)} per les in een pakket met examen inbegrepen.`],
     ['Kan de proefles ook met haar?', 'Ja. Zo merk je meteen of haar aanpak bij je past.'],
   ];
   const body = `${pageHero({
@@ -826,13 +852,13 @@ ${ctaBand({ title: 'Durf jij het aan?', text: 'Plan je proefles met onze instruc
     <div class="prose">
       <span class="eyebrow rv">Ons verhaal</span>
       <h2 class="h2 rv">Rustig leren rijden,<br><span class="grad-text">met een plan.</span></h2>
-      <p class="rv">Bij Rijschool 010 draait het om één ding: dat je met een goed gevoel en goed voorbereid je examen doet. Daarom geven we lessen van 90 minuten, werken we met een plan per les en rijd je altijd privé. Je haalt niemand op en brengt niemand thuis.</p>
+      <p class="rv">Bij Rijschool 010 draait het om één ding: dat je met een goed gevoel en goed voorbereid je examen doet. Daarom rijd je in een pakket lessen van 90 minuten, werken we met een plan per les en rijd je altijd privé. Je haalt niemand op en brengt niemand thuis.</p>
       <p class="rv">Veel van onze leerlingen kwamen bij ons na een eerdere teleurstelling, of omdat ze het rijden spannend vonden. Precies daar zijn we goed in. Rustig waar het moet, direct waar het kan. Je kunt kiezen voor les van onze vrouwelijke instructrice, en de lessen kunnen ook in het Engels.</p>
     </div>
     <aside class="signals rv r">
       <h3>Rijschool 010 in het kort</h3>
       <p>De feiten op een rij.</p>
-      <ul><li>Sinds ${SITE.since} actief in Rotterdam en omgeving</li><li>${SITE.rating} sterren op Google uit ${SITE.reviews} reviews</li><li>Automaat en schakel, lessen van 90 minuten</li><li>Specialist in faalangst en rijangst</li><li>Les in het Nederlands of Engels</li></ul>
+      <ul><li>Sinds ${SITE.since} actief in Rotterdam en omgeving</li><li>${SITE.rating} sterren op Google uit ${SITE.reviews} reviews</li><li>Automaat en schakel, lessen van 45 of 90 minuten</li><li>Specialist in faalangst en rijangst</li><li>Les in het Nederlands of Engels</li></ul>
       <a href="/reviews/" class="btn btn-ghost">Lees de reviews ${ARROW}</a>
     </aside>
   </div>
@@ -857,7 +883,7 @@ ${ctaBand({ title: 'Durf jij het aan?', text: 'Plan je proefles met onze instruc
   </div>
 </section>
 ${ctaBand()}`;
-  page('/over-ons/', { title: 'Over Rijschool 010 | Sinds ' + SITE.since + ' rijles in Rotterdam en Rhoon', desc: `Rijschool 010 geeft sinds ${SITE.since} rijles in Rotterdam en omgeving. Lessen van 90 minuten, privé, specialist in faalangst. ${SITE.rating} sterren op Google.`, body, crumbs });
+  page('/over-ons/', { title: 'Over Rijschool 010 | Sinds ' + SITE.since + ' rijles in Rotterdam en Rhoon', desc: `Rijschool 010 geeft sinds ${SITE.since} rijles in Rotterdam en omgeving. Lessen van 45 en 90 minuten, privé, specialist in faalangst. ${SITE.rating} sterren op Google.`, body, crumbs });
 }
 
 // Geslaagd
@@ -902,10 +928,10 @@ ${ctaBand({ title: 'Woon je in ons werkgebied?', text: 'Plan je proefles. We hal
 {
   const crumbs = [['Home', '/'], ['Veelgestelde vragen', '/veelgestelde-vragen/']];
   const faq = [
-    ['Wat kost een rijles?', `Een losse rijles van 90 minuten kost ${eur(PRICE.les)}. In een pakket betaal je ${eur(PRICE.pakLes)} per les.`],
+    ['Wat kost een rijles?', `Een losse rijles van 45 minuten kost ${eur(PRICE.les)}. In een pakket rijd je lessen van 90 minuten voor ${eur(PRICE.pakLes)} per les.`],
     ['Welke pakketten hebben jullie?', PACKS.map(p => `${p.name}: ${p.lessen} lessen van 90 minuten voor ${eur(p.prijs)}`).join('. ') + '. Bij elk pakket zit je praktijkexamen erbij en is de proefles gratis.'],
     ['Is het examen echt inbegrepen?', 'Ja. Bij elk pakket is je praktijkexamen bij het CBR inbegrepen.'],
-    ['Hoe lang duurt een les?', '90 minuten. Dat staat gelijk aan twee lessen van 45 minuten.'],
+    ['Hoe lang duurt een les?', 'Een losse les duurt 45 minuten. In een pakket rijd je lessen van 90 minuten, zodat je per les meer leert.'],
     ['Hoe bevestig ik mijn proefles of rijles?', 'Na het inplannen krijg je een Tikkie-betaalverzoek. Zodra dat binnen 24 uur betaald is, staat je afspraak vast.'],
     ['Kan ik les krijgen van een vrouwelijke instructrice?', 'Ja. Geef het aan bij je aanmelding.'],
     ['Ik heb faalangst. Kan ik bij jullie terecht?', 'Zeker. Begeleiding bij faalangst en rijangst is onze specialiteit.'],

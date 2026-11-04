@@ -2,3 +2,4 @@ node_modules/
 verify-out/
 verify-summary.json
 src/_v1-index.html
+verify-out.log
