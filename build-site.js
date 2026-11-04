@@ -28,7 +28,7 @@ const SITE = {
 
 // les = losse les van 45 min. Pakketlessen zijn 90 min: los €120, in een pakket €115.
 // examen: losse waarde van het praktijkexamen. null = nog onbekend, dan staat er "+ examen".
-const PRICE = { les: 60, les90: 120, pakLes: 115, proef: 60, examen: null };
+const PRICE = { les: 60, les90: 120, pakLes: 115, proef: 60, examen: 350 };
 const PACKS = [
   { id: 'start', name: 'Start', lessen: 15, sub: 'Voor wie al wat gevoel heeft in de auto' },
   { id: 'compleet', name: 'Compleet', lessen: 20, pop: true, sub: 'De meeste leerlingen hebben dit nodig' },
@@ -44,7 +44,6 @@ PACKS.forEach(p => {
   p.vanTxt = eur(p.van) + (exam == null ? ' + examen' : '');
   p.voordeelTxt = eur(p.voordeel) + (exam == null ? ' + gratis examen' : '');
 });
-const examTxt = exam == null ? 'Gratis (prijs volgt)' : eur(exam);
 
 /* ---------- icons ---------- */
 const P = {
@@ -737,15 +736,8 @@ ${ctaBand({ title: `Rijles in ${l.name}?`, text: `Plan je proefles van 45 minute
     ['Aantal lessen', 'Zoveel je wilt', ...PACKS.map(p => String(p.lessen))],
     ['Prijs per les', eur(PRICE.les), ...PACKS.map(() => eur(PRICE.pakLes))],
     ['Jij betaalt', 'Per les', ...PACKS.map(p => `<span class="hl">${eur(p.prijs)}</span>`)],
-    ['Praktijkexamen', 'Apart', ...PACKS.map(() => '<span class="hl">Inbegrepen</span>')],
+    ['Praktijkexamen', exam == null ? 'Apart' : eur(exam), ...PACKS.map(() => '<span class="hl">Inbegrepen</span>')],
     ['Proefles (45 min)', eur(PRICE.proef), ...PACKS.map(() => 'Gratis')],
-  ];
-  const gain = [
-    ['Los zou je betalen', 'Wat je rijdt', ...PACKS.map(p => `<small>${p.lessen} × ${eur(PRICE.les90)} + proefles + examen</small><br><b>${p.vanTxt}</b>`)],
-    ['Jij betaalt', 'Per les', ...PACKS.map(p => `<b>${eur(p.prijs)}</b>`)],
-    [`Korting op de lessen (${eur(PRICE.les90 - PRICE.pakLes)} per les)`, 'Geen', ...PACKS.map(p => eur(p.korting))],
-    ['Gratis proefles', 'Geen', ...PACKS.map(() => eur(PRICE.proef))],
-    ['Praktijkexamen inbegrepen', 'Geen', ...PACKS.map(() => examTxt)],
   ];
   const body = `${pageHero({ h1: 'Tarieven en pakketten. <span class="grad-text">Examen inbegrepen.</span>', lead: `Losse lessen van 45 minuten voor ${eur(PRICE.les)}, of een pakket met lessen van 90 minuten. In een pakket is je praktijkexamen inbegrepen en is je proefles gratis.`, crumbs, ctas: false })}
 ${pricingSection({ heading: false, cls: '' }).replace('<section id="tarieven" class="">', '<section id="pakketten" style="padding-top:20px">')}
@@ -753,17 +745,10 @@ ${pricingSection({ heading: false, cls: '' }).replace('<section id="tarieven" cl
   <div class="wrap">
     <span class="eyebrow rv">Vergelijken</span>
     <h2 class="h2 rv">Alles naast elkaar</h2>
-    <div class="table-wrap rv"><table class="cmp">
-      <thead><tr><th></th><th>Losse lessen</th>${PACKS.map(p => `<th>${p.name}</th>`).join('')}</tr></thead>
-      <tbody>${rows.map(r => `<tr>${r.map(c => `<td>${c}</td>`).join('')}</tr>`).join('')}</tbody>
-    </table></div>
-    <div style="margin-top:70px"><span class="eyebrow rv">Jouw voordeel</span></div>
-    <h2 class="h2 rv">Wat je met een pakket<br><span class="grad-text">echt bespaart.</span></h2>
-    <p class="lead rv">Bij losse lessen betaal je puur wat je rijdt. In een pakket krijg je korting op elke les, een gratis proefles en je praktijkexamen erbij.</p>
     <div class="table-wrap rv"><table class="cmp gain">
       <thead><tr><th></th><th>Losse lessen</th>${PACKS.map(p => `<th>${p.name}</th>`).join('')}</tr></thead>
-      <tbody>${gain.map(r => `<tr>${r.map(c => `<td>${c}</td>`).join('')}</tr>`).join('')}</tbody>
-      <tfoot><tr><td>Totaal voordeel</td><td>Geen</td>${PACKS.map(p => `<td>${p.voordeelTxt}</td>`).join('')}</tr></tfoot>
+      <tbody>${rows.map(r => `<tr>${r.map(c => `<td>${c}</td>`).join('')}</tr>`).join('')}</tbody>
+      <tfoot><tr><td>Wat je bespaart</td><td>Niets, je betaalt wat je rijdt</td>${PACKS.map(p => `<td>${p.voordeelTxt}<small>${eur(p.korting)} korting + ${eur(PRICE.proef)} proefles${exam == null ? '' : ` + ${eur(exam)} examen`}</small></td>`).join('')}</tr></tfoot>
     </table></div>
   </div>
 </section>

@@ -188,3 +188,10 @@ a.chip{color:inherit}
 .btn-pink:hover{background:#be185d}
 .nav ul a,.dd>button{white-space:nowrap}
 @media (max-width:1180px){.nav li.hide-md{display:none}}
+.cmp.gain tfoot td small{display:block;font-family:Inter,sans-serif;font-weight:500;font-size:.78rem;color:rgba(255,255,255,.85);margin-top:2px}
+
+/* pakket: doorgestreepte losse prijs + bespaar-rij */
+.pack .was s{text-decoration-thickness:2px}
+.pack .was-note{font-size:.75rem;color:var(--muted)}
+.cmp.gain tfoot td{font-family:'Bricolage Grotesque';font-weight:800;font-size:1.15rem;background:var(--blue-2);color:#fff;border:0}
+.cmp.gain tfoot td:first-child,.cmp.gain tfoot td:nth-child(2){color:#fff}
