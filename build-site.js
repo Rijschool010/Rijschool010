@@ -28,7 +28,7 @@ const SITE = {
 
 // les = losse les van 45 min. Pakketlessen zijn 90 min: los €120, in een pakket €115.
 // examen: losse waarde van het praktijkexamen. null = nog onbekend, dan staat er "+ examen".
-const PRICE = { les: 60, les90: 120, pakLes: 115, proef: 60, examen: 350 };
+const PRICE = { les: 60, les90: 120, pakLes: 115, proef: 60, examen: 350, ttt: 250 };
 const PACKS = [
   { id: 'start', name: 'Start', lessen: 15, sub: 'Voor wie al wat gevoel heeft in de auto' },
   { id: 'compleet', name: 'Compleet', lessen: 20, pop: true, sub: 'De meeste leerlingen hebben dit nodig' },
@@ -360,7 +360,7 @@ function navHtml(cur) {
       </ul>
     </nav>
     <div class="nav-cta">
-      <a href="/contact/" class="btn btn-primary">Gratis proefles ${ARROW}</a>
+      <a href="/contact/" class="btn btn-primary"><span class="t-long">Gratis proefles</span><span class="t-short">Proefles</span> ${ARROW}</a>
       <button class="burger" id="burger" aria-label="Menu openen" aria-expanded="false" aria-controls="mobileMenu">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
       </button>
@@ -468,7 +468,7 @@ function pricingSection({ cls = '', heading = true } = {}) {
         <span class="was-note">Los: lessen, proefles en examen</span>
         <div class="p">${eur(p.prijs)}</div>
         <span class="save">Jouw voordeel: ${p.voordeelTxt}</span>
-        <ul><li>${p.lessen} × 90 minuten rijles</li><li>${eur(PRICE.pakLes)} per les (los ${eur(PRICE.les90)})</li><li class="exam">Praktijkexamen inbegrepen</li><li class="gift">Gratis proefles (45 min, t.w.v. ${eur(PRICE.proef)})</li><li>Automaat of schakel</li></ul>
+        <ul><li>${p.lessen} × 90 minuten rijles</li><li>${eur(PRICE.pakLes)} per les (los ${eur(PRICE.les90)})</li><li class="exam">Praktijkexamen inbegrepen${exam == null ? '' : ` (${eur(exam)})`}</li><li class="exam">Gratis herexamen*</li><li class="gift">Gratis proefles (${eur(PRICE.proef)})</li><li>Automaat of schakel</li></ul>
         <a href="/contact/?pakket=${p.id}" class="btn ${p.pop ? 'btn-primary' : 'btn-ghost'}">Kies ${p.name}</a>
       </div>`).join('\n      ');
   return `<section id="tarieven" class="${cls}">
@@ -496,7 +496,7 @@ function pricingSection({ cls = '', heading = true } = {}) {
     <div class="pack-grid">
       ${packs}
     </div>
-    <p class="note rv">In elk pakket rijd je lessen van 90 minuten voor ${eur(PRICE.pakLes)} per les (los ${eur(PRICE.les90)}), is je praktijkexamen bij het CBR inbegrepen en is de proefles gratis.</p>
+    <p class="note rv"><b>*Gratis herexamen bij TTT (tussentijdse toets, ${eur(PRICE.ttt)}).</b><br>In elk pakket rijd je lessen van 90 minuten voor ${eur(PRICE.pakLes)} per les (los ${eur(PRICE.les90)}), met praktijkexamen en gratis proefles.</p>
   </div>
 </section>`;
 }
@@ -726,7 +726,8 @@ ${ctaBand({ title: `Rijles in ${l.name}?`, text: `Plan je proefles van 45 minute
   const crumbs = [['Home', '/'], ['Tarieven', '/tarieven/']];
   const faq = [
     ['Wat kost een losse rijles?', `Een losse rijles van 45 minuten kost ${eur(PRICE.les)}, in de automaat en in de schakelauto.`],
-    ['Wat zit er in een pakket?', `Je lessen van 90 minuten voor ${eur(PRICE.pakLes)} per stuk, je praktijkexamen bij het CBR en een gratis proefles van 45 minuten.`],
+    ['Wat zit er in een pakket?', `Je lessen van 90 minuten voor ${eur(PRICE.pakLes)} per stuk, je praktijkexamen bij het CBR${exam == null ? '' : ` (${eur(exam)})`} en een gratis proefles van 45 minuten (${eur(PRICE.proef)}). Doe je ook de tussentijdse toets, dan is je herexamen gratis.`],
+    ['Wat is de tussentijdse toets?', `Een proefexamen bij het CBR halverwege je lessen, met een echte examinator. De toets kost ${eur(PRICE.ttt)} en is niet inbegrepen in een pakket. Doe je hem wel, dan krijg je bij een pakket een gratis herexamen. Rijd je de toets goed, dan hoef je bij je praktijkexamen de bijzondere verrichtingen niet meer te doen.`],
     ['Kan ik in termijnen betalen?', 'Ja. Je kunt je pakket in één keer betalen, in termijnen, of per les afrekenen.'],
     ['Waarom lessen van 90 minuten?', 'In 90 minuten heb je tijd om iets nieuws te leren én het meteen goed te oefenen. Je rijdt meer en zit minder te wachten.'],
     ['Hoe bevestig ik een les?', 'Na het inplannen krijg je een Tikkie-betaalverzoek. Zodra dat binnen 24 uur betaald is, staat je afspraak vast.'],
@@ -736,20 +737,25 @@ ${ctaBand({ title: `Rijles in ${l.name}?`, text: `Plan je proefles van 45 minute
     ['Aantal lessen', 'Zoveel je wilt', ...PACKS.map(p => String(p.lessen))],
     ['Prijs per les', eur(PRICE.les), ...PACKS.map(() => eur(PRICE.pakLes))],
     ['Jij betaalt', 'Per les', ...PACKS.map(p => `<span class="hl">${eur(p.prijs)}</span>`)],
-    ['Praktijkexamen', exam == null ? 'Apart' : eur(exam), ...PACKS.map(() => '<span class="hl">Inbegrepen</span>')],
-    ['Proefles (45 min)', eur(PRICE.proef), ...PACKS.map(() => 'Gratis')],
+    ['Praktijkexamen', exam == null ? 'Apart' : eur(exam), ...PACKS.map(() => `<span class="hl">Inbegrepen${exam == null ? '' : ` (${eur(exam)})`}</span>`)],
+    ['Tussentijdse toets (optioneel)', eur(PRICE.ttt), ...PACKS.map(() => eur(PRICE.ttt))],
+    ['Proefles (45 min)', eur(PRICE.proef), ...PACKS.map(() => `<span class="hl">Gratis (${eur(PRICE.proef)})</span>`)],
+    ['Herexamen', exam == null ? 'Apart' : eur(exam), ...PACKS.map(() => '<span class="hl">Gratis*</span>')],
+    ['Wat je bespaart', 'Geen', ...PACKS.map(p => `<span class="hl">${p.voordeelTxt}</span>`)],
   ];
+  const cols = [['Losse lessen', 1], ...PACKS.map((p, i) => [p.name, i + 2])];
   const body = `${pageHero({ h1: 'Tarieven en pakketten. <span class="grad-text">Examen inbegrepen.</span>', lead: `Losse lessen van 45 minuten voor ${eur(PRICE.les)}, of een pakket met lessen van 90 minuten. In een pakket is je praktijkexamen inbegrepen en is je proefles gratis.`, crumbs, ctas: false })}
 ${pricingSection({ heading: false, cls: '' }).replace('<section id="tarieven" class="">', '<section id="pakketten" style="padding-top:20px">')}
 <section class="alt">
   <div class="wrap">
     <span class="eyebrow rv">Vergelijken</span>
     <h2 class="h2 rv">Alles naast elkaar</h2>
-    <div class="table-wrap rv"><table class="cmp gain">
+    <div class="table-wrap rv"><table class="cmp">
       <thead><tr><th></th><th>Losse lessen</th>${PACKS.map(p => `<th>${p.name}</th>`).join('')}</tr></thead>
       <tbody>${rows.map(r => `<tr>${r.map(c => `<td>${c}</td>`).join('')}</tr>`).join('')}</tbody>
-      <tfoot><tr><td>Wat je bespaart</td><td>Niets, je betaalt wat je rijdt</td>${PACKS.map(p => `<td>${p.voordeelTxt}<small>${eur(p.korting)} korting + ${eur(PRICE.proef)} proefles${exam == null ? '' : ` + ${eur(exam)} examen`}</small></td>`).join('')}</tr></tfoot>
     </table></div>
+    <div class="cmp-cards">${cols.map(([name, ci]) => `<div class="cmp-card rv${ci === 3 ? ' pop' : ''}"><h4>${name}</h4><dl>${rows.map(r => `<div><dt>${r[0]}</dt><dd>${r[ci]}</dd></div>`).join('')}</dl></div>`).join('')}</div>
+    <p class="note rv"><b>*Gratis herexamen bij TTT (tussentijdse toets, ${eur(PRICE.ttt)}).</b></p>
   </div>
 </section>
 <section>

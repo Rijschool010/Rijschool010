@@ -54,7 +54,8 @@ const ratio = (a, b) => { const l1 = lum(a), l2 = lum(b); return (Math.max(l1, l
     await page.setViewport({ width: 390, height: 844, deviceScaleFactor: 1, isMobile: true, hasTouch: true });
     await page.reload({ waitUntil: 'networkidle2' });
     await new Promise(r => setTimeout(r, 600));
-    res.overflowMobile = await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth);
+    res.overflowMobile = await page.evaluate(() => document.documentElement.scrollWidth <= 390 && document.body.scrollWidth <= 390);
+    res.navMobile = await page.evaluate(async () => { scrollTo(0, 1200); await new Promise(r => setTimeout(r, 300)); const b = document.querySelector('.nav .bar').getBoundingClientRect(); scrollTo(0, 0); return b.top >= 0 && b.right <= 390 && b.left >= 0; });
     res.burger = await page.evaluate(async () => {
       const b = document.getElementById('burger'), m = document.getElementById('mobileMenu'), c = document.getElementById('mobileClose');
       b.click(); await new Promise(r => setTimeout(r, 300)); const o = m.classList.contains('open');
