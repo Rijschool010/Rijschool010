@@ -14,8 +14,8 @@ const SITE = {
   phoneIntl: '+31638661729',
   wa: 'https://wa.me/31638661729',
   email: 'info@rijschool010.nl',
-  street: '', // adres volgt (klant bevestigt nog)
-  zip: '',
+  street: 'Maansteen 13',
+  zip: '3162 TB',
   city: 'Rhoon',
   since: 2011,
   rating: '4,9',
@@ -514,6 +514,7 @@ function contactSection({ title = 'Plan je proefles.', id = 'contact' } = {}) {
           <a href="${SITE.wa}" target="_blank" rel="noopener">${icon('chat')}<span><small>WhatsApp</small>${SITE.phone}</span></a>
           <a href="tel:${SITE.phoneIntl}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg><span><small>Bellen</small>${SITE.phone}</span></a>
           <a href="mailto:${SITE.email}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg><span><small>E-mail</small>${SITE.email}</span></a>
+          <div>${icon('pin')}<span><small>Adres</small>${SITE.street}, ${SITE.zip} ${SITE.city}</span></div>
           <div>${icon('cal')}<span><small>Lesdagen</small>Maandag t/m zaterdag</span></div>
         </div>
       </div>
@@ -910,7 +911,7 @@ ${ctaBand()}`;
 <section style="padding-top:0">
   <div class="wrap">
     <div class="loc-grid">${LOCATIONS.map(l => `<a class="loc rv" href="/rijschool-${l.slug}/">Rijschool ${l.name} ${icon('pin')}</a>`).join('')}</div>
-    <div class="map rv" style="margin-top:30px;aspect-ratio:16/7"><iframe title="Kaart werkgebied Rijschool 010" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Rhoon&z=11&output=embed"></iframe></div>
+    <div class="map rv" style="margin-top:30px;aspect-ratio:16/7"><iframe title="Kaart Rijschool 010, Maansteen 13 Rhoon" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Maansteen+13,+3162+TB+Rhoon&z=13&output=embed"></iframe></div>
   </div>
 </section>
 ${ctaBand({ title: 'Woon je in ons werkgebied?', text: 'Plan je proefles. We halen je op bij huis, school, werk of het station.' })}`;
