@@ -10,12 +10,12 @@ const SRC = path.join(ROOT, 'src');
 const SITE = {
   name: 'Rijschool 010',
   domain: 'https://rijschool010.nl',
-  phone: '06 - 53 65 92 09',
-  phoneIntl: '+31653659209',
-  wa: 'https://wa.me/31653659209',
+  phone: '06 - 38 66 17 29',
+  phoneIntl: '+31638661729',
+  wa: 'https://wa.me/31638661729',
   email: 'info@rijschool010.nl',
-  street: 'Maasenteen 13',
-  zip: '3162 TB',
+  street: '', // adres volgt (klant bevestigt nog)
+  zip: '',
   city: 'Rhoon',
   since: 2011,
   rating: '4,9',
@@ -213,7 +213,7 @@ const SERVICES = [
       ['Lessen dicht op elkaar', 'Meerdere lessen per week of tien dagen achter elkaar.'],
       ['Realistische planning', 'Na de proefles maken we een planning die past bij jouw niveau.'],
       ['Examen inbegrepen', 'Met een pakket zit je praktijkexamen erbij.'],
-      ['Ook in het weekend', 'Zo halen we het maximale uit je beschikbare tijd.'],
+      ['Ook op zaterdag', 'Zo halen we het maximale uit je beschikbare tijd.'],
     ],
     faq: [
       ['Hoe snel kan ik examen doen?', 'Dat hangt af van je niveau en van de beschikbaarheid bij het CBR. Na de proefles maken we een realistische planning.'],
@@ -257,12 +257,12 @@ const SERVICES = [
     intro: 'Je kunt al vanaf 16,5 jaar beginnen met rijlessen en op je 17e praktijkexamen doen. Zo heb je je rijbewijs al op zak voordat je 18 bent.',
     about: [
       'Met 2toDrive mag je vanaf je 17e rijden, zolang er een coach naast je zit die bij het CBR is aangemeld. Dat is bijvoorbeeld een ouder die zelf al minstens vijf jaar een rijbewijs heeft. Vanaf je 18e mag je alleen de weg op. Met lessen begin je al op 16,5 jaar, en theorie-examen doen kan vanaf 16 jaar.',
-      'Vroeg beginnen heeft voordelen. Je hebt meer tijd, je combineert de lessen makkelijk met school, en tot je 18e bouw je met je coach veel extra rijervaring op. We plannen de lessen rond je rooster, ook in het weekend.',
+      'Vroeg beginnen heeft voordelen. Je hebt meer tijd, je combineert de lessen makkelijk met school, en tot je 18e bouw je met je coach veel extra rijervaring op. We plannen de lessen rond je rooster, ook op zaterdag.',
     ],
     signalsTitle: 'Voor jou als je...',
     signals: ['16,5 jaar bent, of bijna', 'je rijbewijs wilt halen naast school', 'op je 18e al ervaren wilt zijn'],
     krijgt: [
-      ['Lessen rond je schoolrooster', 'Na school of in het weekend.'],
+      ['Lessen rond je schoolrooster', 'Na school of op zaterdag.'],
       ['Uitleg over 2toDrive', 'We vertellen precies hoe het werkt met je coach en het CBR.'],
       ['Een plan per les', 'Zodat je op je 17e klaar bent voor je examen.'],
       ['Examen inbegrepen', 'Bij elk pakket zit je praktijkexamen erbij.'],
@@ -310,7 +310,7 @@ SERVICES.forEach(s => { PAGES[s.slug] = { href: `/${s.slug}/`, name: s.name, sho
 
 /* ---------- content: locations ---------- */
 const LOCATIONS = [
-  { slug: 'rhoon', name: 'Rhoon', local: 'Rhoon is onze thuisbasis. Vanaf de Maasenteen rijden we dagelijks door het dorp, door Portland en richting de A15. Rustige woonstraten om te beginnen, en de snelweg dichtbij als je verder bent.', hoods: ['Rhoon-dorp', 'Portland', 'Rhoonse Baan', 'Richting A15'], nearby: ['rotterdam', 'barendrecht', 'schiedam'], img: 'g02' },
+  { slug: 'rhoon', name: 'Rhoon', local: 'Rhoon is onze thuisbasis. We rijden dagelijks door het dorp, door Portland en richting de A15. Rustige woonstraten om te beginnen, en de snelweg dichtbij als je verder bent.', hoods: ['Rhoon-dorp', 'Portland', 'Rhoonse Baan', 'Richting A15'], nearby: ['rotterdam', 'barendrecht', 'schiedam'], img: 'g02' },
   { slug: 'rotterdam', name: 'Rotterdam', local: 'Rotterdam is een stad om goed te leren rijden: drukke kruispunten, trams, veel fietsers en snelwegen rondom. We geven les in heel Rotterdam en rijden het meest op Zuid.', hoods: ['Charlois', 'IJsselmonde', 'Feijenoord', 'Hoogvliet', 'Pendrecht', 'Zuidwijk', 'Lombardijen', 'Centrum'], nearby: ['rhoon', 'barendrecht', 'schiedam'], img: 'g08' },
   { slug: 'barendrecht', name: 'Barendrecht', local: 'In Barendrecht oefen je alles: rustige woonwijken in Carnisselande, rotondes rond het centrum en de drukte bij knooppunt Vaanplein waar de A15 en A29 samenkomen.', hoods: ['Carnisselande', 'Smitshoek', 'Centrum', 'Oude Dorp'], nearby: ['rhoon', 'rotterdam', 'schiedam'], img: 'g04' },
   { slug: 'schiedam', name: 'Schiedam', local: 'Schiedam combineert smalle straten in de historische binnenstad met drukke doorgaande wegen. De A4 en A20 liggen vlakbij, ideaal om invoegen en snelwegrijden te oefenen.', hoods: ['Centrum', 'Kethel', 'Nieuwland', 'Woudhoek', 'Groenoord'], nearby: ['rotterdam', 'vlaardingen', 'maassluis'], img: 'g06' },
@@ -397,7 +397,8 @@ function footerHtml() {
         <div class="nap">
           <a href="tel:${SITE.phoneIntl}">${SITE.phone}</a>
           <a href="mailto:${SITE.email}">${SITE.email}</a>
-          <span>${SITE.street}, ${SITE.zip} ${SITE.city}</span>
+          ${SITE.street ? `<span>${SITE.street}, ${SITE.zip} ${SITE.city}</span>` : ''}
+          <span>Ma t/m za · zondag gesloten</span>
         </div>
       </div>
       <div><h5>Rijlessen</h5><ul>${SERVICES.map(s => `<li><a href="/${s.slug}/">${s.name}</a></li>`).join('')}</ul></div>
@@ -513,7 +514,7 @@ function contactSection({ title = 'Plan je proefles.', id = 'contact' } = {}) {
           <a href="${SITE.wa}" target="_blank" rel="noopener">${icon('chat')}<span><small>WhatsApp</small>${SITE.phone}</span></a>
           <a href="tel:${SITE.phoneIntl}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg><span><small>Bellen</small>${SITE.phone}</span></a>
           <a href="mailto:${SITE.email}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg><span><small>E-mail</small>${SITE.email}</span></a>
-          <div>${icon('pin')}<span><small>Adres</small>${SITE.street}, ${SITE.zip} ${SITE.city}</span></div>
+          <div>${icon('cal')}<span><small>Lesdagen</small>Maandag t/m zaterdag</span></div>
         </div>
       </div>
       <form id="form" novalidate>
@@ -549,7 +550,8 @@ function serviceCards(slugs, { cls = 'card-grid', highlightFirst = false } = {})
 const orgLd = {
   '@context': 'https://schema.org', '@type': 'DrivingSchool', name: SITE.name, url: SITE.domain + '/', telephone: SITE.phoneIntl, email: SITE.email,
   foundingDate: String(SITE.since), image: SITE.domain + '/img/og.jpg', logo: SITE.domain + '/img/icon-512.png',
-  address: { '@type': 'PostalAddress', streetAddress: SITE.street, postalCode: SITE.zip, addressLocality: SITE.city, addressCountry: 'NL' },
+  ...(SITE.street ? { address: { '@type': 'PostalAddress', streetAddress: SITE.street, postalCode: SITE.zip, addressLocality: SITE.city, addressCountry: 'NL' } } : {}),
+  openingHoursSpecification: [{ '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'] }],
   areaServed: LOCATIONS.map(l => l.name),
   aggregateRating: { '@type': 'AggregateRating', ratingValue: SITE.ratingNum, reviewCount: String(SITE.reviews) },
   priceRange: '€€',
@@ -583,7 +585,7 @@ ${SITE.noindex ? '<meta name="robots" content="noindex, nofollow">' : ''}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<script>(function(){var t=null;try{t=localStorage.getItem('r010-theme')}catch(e){}if(!t){t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}document.documentElement.setAttribute('data-theme',t)})();</script>
+<script>(function(){var t=null;try{t=localStorage.getItem('r010-theme')}catch(e){}if(!t){t='dark'}document.documentElement.setAttribute('data-theme',t)})();</script>
 <link rel="stylesheet" href="/assets/site.css">
 ${lds.map(ld).join('\n')}
 </head>
@@ -867,7 +869,7 @@ ${ctaBand({ title: 'Durf jij het aan?', text: 'Plan je proefles met onze instruc
       <div class="feat highlight rv tilt"><div class="ico">${icon('heart')}</div><h4>Rust en vertrouwen</h4><p>Geen stress in de auto. Wel duidelijke uitleg en eerlijke feedback.</p></div>
       <div class="feat rv tilt"><div class="ico">${icon('target')}</div><h4>Een plan per les</h4><p>Je weet altijd waar je staat en wat je volgende stap is.</p></div>
       <div class="feat rv tilt"><div class="ico">${icon('user')}</div><h4>Privé rijles</h4><p>Elke minuut van je les is van jou.</p></div>
-      <div class="feat rv tilt"><div class="ico">${icon('cal')}</div><h4>Ook in het weekend</h4><p>Doordeweeks of op zaterdag en zondag.</p></div>
+      <div class="feat rv tilt"><div class="ico">${icon('cal')}</div><h4>Ook op zaterdag</h4><p>Maandag t/m zaterdag. Op zondag zijn we gesloten.</p></div>
       <div class="feat rv tilt"><div class="ico">${icon('euro')}</div><h4>Betaalgemak</h4><p>In één keer, in termijnen of per les.</p></div>
       <div class="feat rv tilt"><div class="ico">${icon('globe')}</div><h4>Lessons in English</h4><p>Alle lessen kunnen ook in het Engels.</p></div>
     </div>
@@ -908,7 +910,7 @@ ${ctaBand()}`;
 <section style="padding-top:0">
   <div class="wrap">
     <div class="loc-grid">${LOCATIONS.map(l => `<a class="loc rv" href="/rijschool-${l.slug}/">Rijschool ${l.name} ${icon('pin')}</a>`).join('')}</div>
-    <div class="map rv" style="margin-top:30px;aspect-ratio:16/7"><iframe title="Kaart Rijschool 010, ${SITE.street} ${SITE.city}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Rijschool+010,+Maasenteen+13,+3162+TB+Rhoon&z=11&output=embed"></iframe></div>
+    <div class="map rv" style="margin-top:30px;aspect-ratio:16/7"><iframe title="Kaart werkgebied Rijschool 010" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Rhoon&z=11&output=embed"></iframe></div>
   </div>
 </section>
 ${ctaBand({ title: 'Woon je in ons werkgebied?', text: 'Plan je proefles. We halen je op bij huis, school, werk of het station.' })}`;
@@ -927,7 +929,7 @@ ${ctaBand({ title: 'Woon je in ons werkgebied?', text: 'Plan je proefles. We hal
     ['Kan ik les krijgen van een vrouwelijke instructrice?', 'Ja. Geef het aan bij je aanmelding.'],
     ['Ik heb faalangst. Kan ik bij jullie terecht?', 'Zeker. Begeleiding bij faalangst en rijangst is onze specialiteit.'],
     ['Vanaf welke leeftijd kan ik beginnen?', 'Vanaf 16,5 jaar. Op je 17e kun je praktijkexamen doen.'],
-    ['Geven jullie ook les in het weekend?', 'Ja, doordeweeks en in het weekend.'],
+    ['Geven jullie ook les in het weekend?', 'Op zaterdag wel. We geven les van maandag t/m zaterdag, op zondag zijn we gesloten.'],
     ['Do you offer driving lessons in English?', 'Yes. You can follow all your lessons in English, in an automatic or a manual car.'],
     ['Waar geven jullie les?', 'In Rhoon, Rotterdam, Barendrecht, Schiedam, Vlaardingen, Maassluis en Maasland. Daarbuiten spreken we af bij een station in de regio.'],
   ];
@@ -960,7 +962,7 @@ ${contactSection({ title: 'Plan je proefles.', id: 'contact' }).replace('<sectio
     <h3>Je rechten</h3>
     <p>Je mag altijd vragen welke gegevens we van je hebben, en vragen om ze aan te passen of te verwijderen. Stuur daarvoor een mail naar <a href="mailto:${SITE.email}">${SITE.email}</a>.</p>
     <h3>Contact</h3>
-    <p>Rijschool 010, ${SITE.street}, ${SITE.zip} ${SITE.city}. Telefoon ${SITE.phone}.</p>
+    <p>Rijschool 010. Telefoon ${SITE.phone}, e-mail ${SITE.email}.</p>
   </div>
 </section>`;
   page('/privacy/', { title: 'Privacyverklaring | Rijschool 010', desc: 'Privacyverklaring van Rijschool 010.', body, crumbs });
