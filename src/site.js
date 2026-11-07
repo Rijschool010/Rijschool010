@@ -4,14 +4,6 @@
   var $=function(s,c){return (c||document).querySelector(s)};
   var $$=function(s,c){return Array.prototype.slice.call((c||document).querySelectorAll(s))};
 
-  // theme toggle
-  $$('[data-set]').forEach(function(b){
-    b.addEventListener('click',function(){
-      var t=b.getAttribute('data-set');root.setAttribute('data-theme',t);
-      try{localStorage.setItem('r010-theme',t)}catch(e){}
-    });
-  });
-
   // nav + progress + hero parallax
   var nav=$('#nav'),prog=$('#progress'),heroImg=$('#heroImg img');
   function onScroll(){

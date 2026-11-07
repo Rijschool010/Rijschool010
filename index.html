@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="nl">
+<html lang="nl" data-theme="dark">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,7 +18,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<script>(function(){var t=null;try{t=localStorage.getItem('r010-theme')}catch(e){}if(!t){t='dark'}document.documentElement.setAttribute('data-theme',t)})();</script>
 <link rel="stylesheet" href="/assets/site.css">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"DrivingSchool","name":"Rijschool 010","url":"https://rijschool010.nl/","telephone":"+31638661729","email":"info@rijschool010.nl","foundingDate":"2011","image":"https://rijschool010.nl/img/og.jpg","logo":"https://rijschool010.nl/img/icon-512.png","address":{"@type":"PostalAddress","streetAddress":"Maansteen 13","postalCode":"3162 TB","addressLocality":"Rhoon","addressCountry":"NL"},"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]}],"areaServed":["Rhoon","Rotterdam","Barendrecht","Schiedam","Vlaardingen","Maassluis","Maasland"],"aggregateRating":{"@type":"AggregateRating","ratingValue":"4.9","reviewCount":"56"},"priceRange":"€€"}</script>
 </head>
@@ -60,10 +59,6 @@
   <a href="/geslaagd/">Geslaagd</a><a href="/reviews/">Reviews</a><a href="/over-ons/">Over ons</a><a href="/veelgestelde-vragen/">Veelgestelde vragen</a><a href="/contact/">Contact</a>
   <a href="/contact/" class="btn btn-primary" style="justify-content:center;margin-top:10px">Plan je gratis proefles</a>
 </div>
-<div class="theme-fab" role="group" aria-label="Thema kiezen">
-  <button class="t-light" data-set="light" aria-label="Licht thema"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
-  <button class="t-dark" data-set="dark" aria-label="Donker thema"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
-</div>
 <a class="wa-fab" href="https://wa.me/31638661729?text=Hoi%20Rijschool%20010%2C%20ik%20wil%20graag%20een%20proefles%20plannen." target="_blank" rel="noopener" aria-label="WhatsApp Rijschool 010">
   <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1s-.5-.1-.7.1-.8 1-.9 1.2-.3.2-.6.1a8 8 0 0 1-2.4-1.5 9 9 0 0 1-1.6-2c-.2-.3 0-.5.1-.6l.4-.5.3-.5v-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6a1.1 1.1 0 0 0-.8.4 3.4 3.4 0 0 0-1 2.5 6 6 0 0 0 1.2 3.1 13 13 0 0 0 5.2 4.6c1.8.8 2.6.8 3.5.7a3 3 0 0 0 2-1.4 2.4 2.4 0 0 0 .2-1.4c-.1-.2-.3-.2-.6-.4zM12 21.8a9.8 9.8 0 0 1-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4A9.8 9.8 0 1 1 12 21.8zm8.4-18.2A11.8 11.8 0 0 0 1.8 17.8L.1 24l6.3-1.7A11.8 11.8 0 0 0 24 12a11.7 11.7 0 0 0-3.6-8.4z"/></svg>
 </a>
@@ -85,7 +80,7 @@
       </h1>
       <p class="lead rv">Rijles in <b>automaat</b> én <b>schakel</b> in Rotterdam-Zuid, Rhoon en omgeving. Gespecialiseerd in faalangst en rijangst. Met een geduldige instructeur, of een <b>vrouwelijke instructrice</b> als je dat fijner vindt.</p>
       <div class="hero-ctas rv">
-        <a href="#contact" class="btn btn-primary magnetic">Plan je gratis proefles
+        <a href="/contact/" class="btn btn-primary magnetic">Plan je gratis proefles
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         <a href="/tarieven/" class="btn btn-ghost magnetic">Bekijk pakketten</a>
       </div>
@@ -157,24 +152,24 @@
   </div>
 </section>
 
-<!-- FEATURES -->
-<section style="padding-top:20px">
+<!-- ONTDEK: korte tegels die doorlinken -->
+<section id="ontdek" style="padding-top:20px">
   <div class="wrap">
-    <span class="eyebrow rv">Waarom Rijschool 010</span>
-    <h2 class="h2 rv">Alles om met een<br><span class="grad-text">goed gevoel</span> te rijden.</h2>
-    <div class="feat-grid">
-      <a href="/rijles-faalangst/" class="feat highlight rv tilt"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9z"/></svg></div><h4>Faalangst & rijangst</h4><p>Onze specialiteit. We nemen de tijd, blijven rustig en bouwen samen je zelfvertrouwen op.</p><span class="more">Lees meer <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
-      <a href="/opfriscursus/" class="feat rv tilt"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5M12 7v5l3 2"/></svg></div><h4>Opfriscursus</h4><p>Wel een rijbewijs, maar lang niet gereden? Wij helpen je weer zeker de weg op.</p><span class="more">Lees meer <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
-      <a href="/driving-lessons-english/" class="feat rv tilt"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg></div><h4>Lessons in English</h4><p>New in the Netherlands? Follow your driving lessons fully in English.</p><span class="more">Lees meer <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
-      <a href="/spoedcursus/" class="feat rv tilt"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></div><h4>Spoedcursus</h4><p>Vaker per week, of 10 dagen achter elkaar lessen en daarna direct praktijkexamen.</p><span class="more">Lees meer <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
-      <a href="/contact/" class="feat rv tilt"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></div><h4>Ook op zaterdag</h4><p>Maandag t/m zaterdag. Les wanneer het jou uitkomt, op zondag zijn we gesloten.</p><span class="more">Plan een les <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
-      <a href="/over-ons/" class="feat rv tilt"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></div><h4>Privé rijles</h4><p>Geen andere leerlingen ophalen of thuisbrengen. Elke minuut is van jou.</p><span class="more">Lees meer <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
-      <a href="/tarieven/" class="feat rv tilt"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20M6 15h4"/></svg></div><h4>Betaalgemak</h4><p>Pakket in één keer, in termijnen, of per les afrekenen. Jij kiest wat past.</p><span class="more">Lees meer <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
-      <a href="/rijles-vanaf-16-5-jaar/" class="feat rv tilt"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg></div><h4>Vanaf 16,5 jaar</h4><p>Begin vanaf 16,5 jaar met rijles en doe op je 17e examen (2toDrive).</p><span class="more">Lees meer <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
-      <a href="/werkgebied/" class="feat rv tilt"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg></div><h4>Ophalen in de regio</h4><p>Rhoon, Rotterdam, Barendrecht, Schiedam, Vlaardingen, Maassluis en Maasland.</p><span class="more">Lees meer <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+    <div class="center">
+      <span class="eyebrow rv">Ontdek Rijschool 010</span>
+      <h2 class="h2 rv">Kies wat bij<br><span class="grad-text">jou past.</span></h2>
+    </div>
+    <div class="bento">
+      <a href="/proefles/" class="bt rv"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 12v10H4V12M2 7h20v5H2zM12 22V7M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg></div><div><h4>Gratis proefles</h4><p>45 minuten kennismaken, gratis bij elk pakket.</p></div><span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+      <a href="/rijles-faalangst/" class="bt rv"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9z"/></svg></div><div><h4>Faalangst & rijangst</h4><p>Onze specialiteit. Rustig en in jouw tempo.</p></div><span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+      <a href="/spoedcursus/" class="bt rv"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></div><div><h4>Spoedcursus</h4><p>Vaker per week en snel naar je examen.</p></div><span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+      <a href="/driving-lessons-english/" class="bt rv"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg></div><div><h4>Lessons in English</h4><p>All driving lessons fully in English.</p></div><span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+      <a href="/rijles-vanaf-16-5-jaar/" class="bt rv"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg></div><div><h4>Vanaf 16,5 jaar</h4><p>Begin nu, examen op je 17e (2toDrive).</p></div><span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+      <a href="/opfriscursus/" class="bt rv"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5M12 7v5l3 2"/></svg></div><div><h4>Opfriscursus</h4><p>Lang niet gereden? Weer zeker de weg op.</p></div><span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
     </div>
   </div>
 </section>
+
 
 <!-- VROUWELIJKE INSTRUCTRICE -->
 <section id="instructrice" class="lady">
@@ -258,23 +253,6 @@
   </div>
 </section>
 
-<!-- STEPS -->
-<section style="padding-top:40px">
-  <div class="wrap">
-    <div class="center">
-      <span class="eyebrow rv">Zo werkt het</span>
-      <h2 class="h2 rv">In 4 stappen naar<br><span class="grad-text">je roze pasje.</span></h2>
-    </div>
-    <div class="steps" id="steps">
-      <div class="road"><i></i></div>
-      <div class="step rv"><div class="n">1</div><h4>Aanmelden</h4><p>Vul het formulier in of stuur een WhatsApp. Binnen 24 uur hoor je van ons.</p></div>
-      <div class="step rv"><div class="n">2</div><h4>Proefles</h4><p>45 minuten kennismaken. Gratis bij elk pakket.</p></div>
-      <div class="step rv"><div class="n">3</div><h4>Rijlessen</h4><p>Lessen met een plan per les, op jouw tempo. In een pakket zijn ze 90 minuten.</p></div>
-      <div class="step rv"><div class="n">4</div><h4>Examen</h4><p>Goed voorbereid naar het CBR. Bij een pakket zit je examen erbij.</p></div>
-    </div>
-  </div>
-</section>
-
 <!-- GESLAAGD -->
 <section id="geslaagd" class="gallery">
   <div class="wrap">
@@ -285,11 +263,10 @@
     </div>
   </div>
   <div class="g-rows" data-gallery="marquee" data-from="1" data-to="24"></div>
-  <div class="wrap center" style="margin-top:40px"><a href="/geslaagd/" class="btn btn-ghost rv">Bekijk alle geslaagden</a></div>
-</section>
+  </section>
 
 <!-- REVIEWS -->
-<section id="reviews">
+<section id="reviews" style="padding-top:20px">
   <div class="wrap">
     <div class="rev-head">
       <div>
@@ -305,82 +282,31 @@
       <article class="review rv"><div class="who"><span class="av">C</span><div><b>Carolina U.</b><small>Google review</small></div></div><p>Jafri is een rustige en positieve rijinstructeur die altijd topadvies geeft. Echt de beste rijinstructeur die je je kunt wensen. Ik was gestopt met rijden, maar dankzij Jafri heb ik het plezier in autorijden weer helemaal teruggevonden.</p></article>
       <article class="review rv"><div class="who"><span class="av">T</span><div><b>Tara Brouw</b><small>Google review</small></div></div><p>Langere tijd uitgesteld om af te rijden, Shahbaz heeft mij het vertrouwen gegeven door een rustige duidelijke begeleiding. Met als resultaat in 1x geslaagd!!!! Kan niks anders zeggen dan een top rijschool!!!</p></article>
       <article class="review rv"><div class="who"><span class="av">F</span><div><b>Farhana Shahid</b><small>Google review</small></div></div><p>Na twee eerdere teleurstellingen ben ik bij deze rijschool uitstekend begeleid. De instructeur is zeer deskundig en biedt een realistische kijk op het leerproces. Dankzij zijn aanpak heb ik mijn zelfvertrouwen in de auto weer terug.</p></article>
-      <article class="review rv"><div class="who"><span class="av">M</span><div><b>Martin O.</b><small>Google review · English</small></div></div><p>Highly recommend Rijschool 010. Was able to take great driving lessons in English which helped me pass my exam in one try. Each lesson has a plan to help you be prepared for the exam, which I really appreciated.</p></article>
-      <article class="review rv"><div class="who"><span class="av">I</span><div><b>Isabelle Zielinski</b><small>Google review</small></div></div><p>Shabaz is echt een topper! Hij blijft zo rustig en is altijd positief. Als je rijden spannend vindt of faalangst hebt, ga dan vooral bij hem rijden!!!!</p></article>
-      <article class="review rv"><div class="who"><span class="av">T</span><div><b>T. Muller</b><small>Google review</small></div></div><p>Ik ben vandaag in een keer geslaagd voor het praktijkexamen! De instructeur is heel lief en geduldig, ik ging altijd met veel plezier naar rijles. Hij leert je op je eigen tempo stap voor stap auto rijden.</p></article>
     </div>
+    <div class="center more-row rv"><a href="/reviews/" class="btn btn-ghost">Alle reviews</a><a href="/geslaagd/" class="btn btn-ghost">Alle geslaagden</a></div>
   </div>
 </section>
 
 <!-- WERKGEBIED -->
-<section id="werkgebied" style="padding-top:40px">
-  <div class="wrap area-grid">
-    <div>
-      <span class="eyebrow rv">Werkgebied</span>
-      <h2 class="h2 rv">Wij rijden in<br><span class="grad-text">jouw buurt.</span></h2>
-      <p class="lead rv">We halen je thuis, op school of op je werk op. Woon je net buiten ons gebied? Dan spreken we af bij een station in de regio.</p>
-      <div class="chips rv">
+<section id="werkgebied" class="tight">
+  <div class="wrap">
+    <div class="area-band rv">
+      <div><span class="eyebrow">Werkgebied</span><h3>We halen je op in jouw buurt.</h3></div>
+      <div class="chips">
         <a class="chip" href="/rijschool-rhoon/">Rhoon</a><a class="chip" href="/rijschool-rotterdam/">Rotterdam</a><a class="chip" href="/rijschool-barendrecht/">Barendrecht</a><a class="chip" href="/rijschool-schiedam/">Schiedam</a><a class="chip" href="/rijschool-vlaardingen/">Vlaardingen</a><a class="chip" href="/rijschool-maassluis/">Maassluis</a><a class="chip" href="/rijschool-maasland/">Maasland</a>
       </div>
-      <a href="/werkgebied/" class="btn btn-primary rv">Bekijk ons werkgebied</a>
-    </div>
-    <div class="map rv r">
-      <iframe title="Kaart Rijschool 010, Maansteen 13 Rhoon" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Maansteen+13,+3162+TB+Rhoon&z=13&output=embed"></iframe>
     </div>
   </div>
 </section>
 
-<!-- FAQ -->
-<section id="faq" style="padding-top:40px">
+<section class="tight">
   <div class="wrap">
-    <div class="center">
-      <span class="eyebrow rv">Veelgestelde vragen</span>
-      <h2 class="h2 rv">Goed om te weten</h2>
-    </div>
-    <div class="faq-wrap">
-      <div class="faq rv"><button aria-expanded="false">Hoeveel kost een rijles bij Rijschool 010?<span class="pm">+</span></button><div class="a"><div><p>Een losse rijles van 45 minuten kost €60, in de automaat en in de schakelauto. In een pakket rijd je lessen van 90 minuten voor €115 per les, is je praktijkexamen inbegrepen en is de proefles van 45 minuten gratis.</p></div></div></div>
-      <div class="faq rv"><button aria-expanded="false">Kan ik les krijgen van een vrouwelijke instructrice?<span class="pm">+</span></button><div class="a"><div><p>Ja. Geef bij je aanmelding aan dat je les wilt van onze instructrice. Weet wel: ze is pittig en direct. Ze legt de lat hoog, en dat werkt, want haar leerlingen slagen.</p></div></div></div>
-      <div class="faq rv"><button aria-expanded="false">Ik heb faalangst. Kan ik bij jullie terecht?<span class="pm">+</span></button><div class="a"><div><p>Zeker. Begeleiding bij faalangst en rijangst is onze specialiteit. We werken rustig, positief en in jouw tempo. Veel van onze leerlingen slaagden zo in één keer.</p></div></div></div>
-      <div class="faq rv"><button aria-expanded="false">Hoe bevestig ik mijn proefles of rijles?<span class="pm">+</span></button><div class="a"><div><p>Na het inplannen ontvang je een Tikkie-betaalverzoek. Zodra dat binnen 24 uur is voldaan, staat je afspraak definitief vast.</p></div></div></div>
-      <div class="faq rv"><button aria-expanded="false">Vanaf welke leeftijd kan ik beginnen?<span class="pm">+</span></button><div class="a"><div><p>Je kunt vanaf 16,5 jaar beginnen met rijlessen en op je 17e praktijkexamen doen.</p></div></div></div>
-      <div class="faq rv"><button aria-expanded="false">Do you offer driving lessons in English?<span class="pm">+</span></button><div class="a"><div><p>Yes! You can follow all your lessons in English, in both an automatic and a manual car.</p></div></div></div>
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact">
-  <div class="wrap">
-    <div class="contact-box rv s">
-      <div class="contact-side">
-        <span class="eyebrow" style="color:#fff">Meld je aan</span>
-        <h2>Plan je proefles.</h2>
-        <p>Vul het formulier in en we nemen binnen 24 uur contact met je op. Vraag je liever iets snel? Stuur een WhatsApp.</p>
-        <div class="c-lines">
-          <a href="https://wa.me/31638661729" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 21l2.1-5.5A8.4 8.4 0 1 1 21 11.5z"/></svg><span><small>WhatsApp</small>06 - 38 66 17 29</span></a>
-          <a href="tel:+31638661729"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg><span><small>Bellen</small>06 - 38 66 17 29</span></a>
-          <a href="mailto:info@rijschool010.nl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg><span><small>E-mail</small>info@rijschool010.nl</span></a>
-          <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><span><small>Adres</small>Maansteen 13, 3162 TB Rhoon</span></div>
-          <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><span><small>Lesdagen</small>Maandag t/m zaterdag</span></div>
-        </div>
+    <div class="cta-band rv s">
+      <div style="position:relative;z-index:1"><h2>Klaar om te beginnen?</h2><p>Plan je proefles van 45 minuten. Bij elk pakket is die gratis, en je praktijkexamen zit erbij.</p></div>
+      <div class="acts">
+        <a href="/contact/" class="btn btn-white">Plan je gratis proefles <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a href="https://wa.me/31638661729" target="_blank" rel="noopener" class="btn btn-outline">Stuur een WhatsApp</a>
       </div>
-      <form id="form" novalidate>
-        <div class="f"><label for="naam">Voor- en achternaam *</label><input id="naam" name="naam" required autocomplete="name"></div>
-        <div class="f"><label for="tel">Telefoonnummer *</label><input id="tel" name="tel" type="tel" required autocomplete="tel"></div>
-        <div class="f"><label for="mail">E-mailadres</label><input id="mail" name="mail" type="email" autocomplete="email"></div>
-        <div class="f"><label for="plaats">Postcode en woonplaats *</label><input id="plaats" name="plaats" required autocomplete="postal-code"></div>
-        <div class="f full"><label>Ik wil les in een *</label>
-          <div class="seg"><label><input type="radio" name="auto" value="Automaat" checked><span>Automaat</span></label><label><input type="radio" name="auto" value="Schakel"><span>Schakel</span></label></div>
-        </div>
-        <div class="f full"><label>Instructeur</label>
-          <div class="seg pinkseg"><label><input type="radio" name="instr" value="Geen voorkeur" checked><span>Geen voorkeur</span></label><label><input type="radio" name="instr" value="Vrouwelijke instructrice" id="pickLady"><span>Vrouwelijke instructrice</span></label></div>
-        </div>
-        <div class="f"><label for="pakket">Pakket</label><select id="pakket" name="pakket"><option value="onbekend">Weet ik nog niet</option><option value="start">Start: 15 lessen, €1.725</option><option value="compleet">Compleet: 20 lessen, €2.300</option><option value="zeker">Zeker Slagen: 30 lessen, €3.450</option><option value="los">Losse lessen</option></select></div>
-        <div class="f"><label for="theorie">Heb je je theorie al? *</label><select id="theorie" name="theorie"><option>Ja</option><option>Nee, nog niet</option><option>Ik heb al een rijbewijs (opfris)</option></select></div>
-        <div class="f full"><label for="contactvia">Hoe wil je benaderd worden?</label><select id="contactvia" name="contactvia"><option>WhatsApp</option><option>Gebeld worden</option><option>E-mail</option></select></div>
-        <div class="f full"><label for="bericht">Beschikbaarheid of vraag</label><textarea id="bericht" name="bericht" rows="3" placeholder="Bijv. dinsdag en zaterdag, of: ik heb last van faalangst"></textarea></div>
-        <button class="btn btn-primary" type="submit">Verstuur aanmelding <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
-      </form>
     </div>
   </div>
 </section>

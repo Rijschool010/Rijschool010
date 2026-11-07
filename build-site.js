@@ -303,7 +303,7 @@ const SERVICES = [
 
 /* extra link targets used in "related" */
 const PAGES = {
-  tarieven: { href: '/tarieven/', name: 'Tarieven en pakketten', short: 'Losse les €120, pakketten met examen inbegrepen.', icon: 'euro' },
+  tarieven: { href: '/tarieven/', name: 'Tarieven en pakketten', short: 'Losse les €60, pakketten met examen inbegrepen.', icon: 'euro' },
   instructrice: { href: '/instructrice/', name: 'Vrouwelijke instructrice', short: 'Pittig, direct en een hoog slagingspercentage.', icon: 'user' },
 };
 SERVICES.forEach(s => { PAGES[s.slug] = { href: `/${s.slug}/`, name: s.name, short: s.short, icon: s.icon }; });
@@ -377,10 +377,6 @@ function navHtml(cur) {
   <div class="mm-label">Meer</div>
   <a href="/geslaagd/">Geslaagd</a><a href="/reviews/">Reviews</a><a href="/over-ons/">Over ons</a><a href="/veelgestelde-vragen/">Veelgestelde vragen</a><a href="/contact/">Contact</a>
   <a href="/contact/" class="btn btn-primary" style="justify-content:center;margin-top:10px">Plan je gratis proefles</a>
-</div>
-<div class="theme-fab" role="group" aria-label="Thema kiezen">
-  <button class="t-light" data-set="light" aria-label="Licht thema"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
-  <button class="t-dark" data-set="dark" aria-label="Donker thema"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
 </div>
 <a class="wa-fab" href="${SITE.wa}?text=Hoi%20Rijschool%20010%2C%20ik%20wil%20graag%20een%20proefles%20plannen." target="_blank" rel="noopener" aria-label="WhatsApp Rijschool 010">
   <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1s-.5-.1-.7.1-.8 1-.9 1.2-.3.2-.6.1a8 8 0 0 1-2.4-1.5 9 9 0 0 1-1.6-2c-.2-.3 0-.5.1-.6l.4-.5.3-.5v-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6a1.1 1.1 0 0 0-.8.4 3.4 3.4 0 0 0-1 2.5 6 6 0 0 0 1.2 3.1 13 13 0 0 0 5.2 4.6c1.8.8 2.6.8 3.5.7a3 3 0 0 0 2-1.4 2.4 2.4 0 0 0 .2-1.4c-.1-.2-.3-.2-.6-.4zM12 21.8a9.8 9.8 0 0 1-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4A9.8 9.8 0 1 1 12 21.8zm8.4-18.2A11.8 11.8 0 0 0 1.8 17.8L.1 24l6.3-1.7A11.8 11.8 0 0 0 24 12a11.7 11.7 0 0 0-3.6-8.4z"/></svg>
@@ -567,7 +563,7 @@ function layout({ url, title, desc, body, crumbs, faq, lang = 'nl', extraLd = []
   if (crumbs) lds.push(crumbLd(crumbs));
   if (faq) lds.push(faqLd(faq));
   return `<!doctype html>
-<html lang="${lang}">
+<html lang="${lang}" data-theme="dark">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -586,7 +582,6 @@ ${SITE.noindex ? '<meta name="robots" content="noindex, nofollow">' : ''}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<script>(function(){var t=null;try{t=localStorage.getItem('r010-theme')}catch(e){}if(!t){t='dark'}document.documentElement.setAttribute('data-theme',t)})();</script>
 <link rel="stylesheet" href="/assets/site.css">
 ${lds.map(ld).join('\n')}
 </head>
@@ -610,7 +605,7 @@ const page = (url, opts) => out.push({ url, html: layout({ url, ...opts }) });
 {
   const body = fs.readFileSync(path.join(SRC, 'home.html'), 'utf8')
     .replace('{{PRICING}}', pricingSection())
-    .replace('{{CONTACT}}', contactSection());
+    .replace('{{CTA}}', ctaBand());
   page('/', {
     title: 'Rijschool 010 | Rijles automaat en schakel in Rhoon en Rotterdam',
     desc: `Rijschool 010 geeft sinds ${SITE.since} rijles in automaat en schakel in Rhoon, Rotterdam, Barendrecht, Schiedam, Vlaardingen, Maassluis en Maasland. Specialist in faalangst. ${SITE.rating} sterren op Google.`,
