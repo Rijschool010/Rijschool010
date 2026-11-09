@@ -388,7 +388,10 @@ footer{padding:70px 0 110px;border-top:1px solid var(--line);margin-top:40px}
 }
 
 /* subpage hero */
-.page-hero{padding:160px 0 70px;overflow:hidden}
+.page-hero{padding:160px 0 70px;overflow:hidden;position:relative}
+.page-hero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:180px;background:linear-gradient(to bottom,transparent,var(--bg));z-index:0;pointer-events:none}
+.form-alt{grid-column:1/-1;margin:4px 0 0;font-size:.92rem;color:var(--muted)}
+.form-alt a{color:var(--text);text-decoration:underline}
 .page-hero .wrap{position:relative;z-index:1}
 .page-hero h1{font-size:clamp(2.4rem,5.4vw,4.4rem);font-weight:800;margin:18px 0 18px;max-width:900px}
 .page-hero .lead{font-size:1.12rem;max-width:680px}
@@ -437,8 +440,9 @@ a.feat:hover .more svg{transform:translateX(4px)}
 
 /* numbered deliverables */
 .krijgt{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:46px}
-.krijgt div{display:flex;gap:18px;padding:26px;border-radius:var(--radius);background:var(--surface);border:1px solid var(--line)}
+.krijgt>div{display:flex;gap:18px;padding:26px;border-radius:var(--radius);background:var(--surface);border:1px solid var(--line)}
 .krijgt b.k{flex:none;width:46px;height:46px;border-radius:14px;display:grid;place-items:center;background:var(--grad);color:#fff;font-family:'Bricolage Grotesque';font-size:1.1rem}
+.krijgt>div>div{min-width:0}
 .krijgt h4{font-size:1.15rem;margin-bottom:4px}
 .krijgt p{color:var(--muted);font-size:.95rem}
 
@@ -628,3 +632,40 @@ a.chip{color:inherit}
   .foot>div:first-child{grid-column:1/-1}
   .foot ul{gap:8px;font-size:.9rem}
 }
+
+/* instructrice-kaart: nooit tekst afknippen */
+@media (max-width:1020px){
+  .lady-visual{aspect-ratio:auto;min-height:340px;padding:34px 0}
+  .lady-visual .avatar{width:110px;height:110px;margin-bottom:18px}
+  .lady-visual .avatar svg{width:52px;height:52px}
+  .lady-visual h3{font-size:1.7rem}
+}
+.loc-grid.three{grid-template-columns:repeat(3,1fr)}
+@media (max-width:640px){
+  .loc-grid.three{grid-template-columns:1fr}
+  /* lange kaartenlijsten compact op telefoon: icoon links, tekst rechts */
+  .card-grid{gap:12px;margin-top:32px}
+  .feat{display:grid;grid-template-columns:44px 1fr;column-gap:14px;align-items:start;padding:18px}
+  .feat .ico{width:44px;height:44px;border-radius:12px;margin:0;grid-row:span 3}
+  .feat .ico svg{width:21px;height:21px}
+  .feat h4{font-size:1.08rem;margin:2px 0 4px}
+  .feat p{font-size:.9rem}
+  a.feat .more{margin-top:8px}
+}
+@media (max-width:640px){
+  .g-grid{columns:2;column-gap:10px;margin-top:30px}
+  .g-grid .g-item{margin-bottom:10px;border-radius:14px}
+}
+
+/* tablet: geen losse wees-kaarten */
+@media (min-width:641px) and (max-width:1020px){
+  .card-grid{grid-template-columns:repeat(3,1fr);gap:14px}
+  .card-grid .feat{padding:22px}
+  .card-grid .feat h4{font-size:1.1rem}
+  .price-strip{grid-template-columns:repeat(3,1fr)}
+  .pack-grid>:last-child:nth-child(odd){grid-column:1/-1;justify-self:center;width:calc(50% - 10px)}
+  #reviews .rev-grid{columns:auto;display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:14px;margin-inline:calc(16px * -1);padding:4px 16px 8px;scroll-padding-inline:16px;scrollbar-width:none}
+  #reviews .rev-grid::-webkit-scrollbar{display:none}
+  #reviews .review{flex:0 0 46%;margin:0;scroll-snap-align:start}
+}
+.hero h1 .line{padding-bottom:.12em;margin-bottom:-.12em}
