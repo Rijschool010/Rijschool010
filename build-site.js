@@ -991,8 +991,8 @@ ${contactSection({ title: 'Stel je vraag.', id: 'contact', vraag: true }).replac
 
 // Bedankt
 {
-  const body = `${pageHero({ h1: 'Bedankt! <span class="grad-text">We hebben je aanmelding.</span>', lead: 'We nemen binnen 24 uur contact met je op om je proefles in te plannen. Daarna ontvang je een Tikkie-betaalverzoek. Zodra dat betaald is, staat je afspraak vast.', ctas: `<a href="${SITE.wa}" target="_blank" rel="noopener" class="btn btn-primary magnetic">Stuur alvast een WhatsApp ${ARROW}</a><a href="/" class="btn btn-ghost magnetic">Terug naar home</a>` })}`;
-  page('/bedankt/', { title: 'Bedankt voor je aanmelding | Rijschool 010', desc: 'Bedankt voor je aanmelding bij Rijschool 010.', body });
+  const body = `${pageHero({ h1: 'Bedankt! <span class="grad-text">We hebben je bericht ontvangen.</span>', lead: 'We nemen binnen 24 uur persoonlijk contact met je op. In dat gesprek bespreken we de vervolgstappen en vertellen we je precies hoe alles verder werkt.', ctas: `<a href="${SITE.wa}" target="_blank" rel="noopener" class="btn btn-primary magnetic">Stuur alvast een WhatsApp ${ARROW}</a><a href="/" class="btn btn-ghost magnetic">Terug naar home</a>` })}`;
+  page('/bedankt/', { title: 'Bedankt voor je bericht | Rijschool 010', desc: 'Bedankt voor je bericht aan Rijschool 010.', body });
 }
 
 // 404
