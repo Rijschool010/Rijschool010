@@ -114,13 +114,29 @@
   if(q.get('pakket'))pick('pakket',q.get('pakket'));
   $$('[data-pick-lady]').forEach(function(a){a.addEventListener('click',function(){var r=$('#pickLady');if(r)r.checked=true})});
 
-  // form (demo: validates, then goes to the thank-you page)
+  // form: Web3Forms als er een key is, anders demo (direct naar /bedankt/)
   var form=$('#form');
   if(form)form.addEventListener('submit',function(e){
     e.preventDefault();
     var bad=null;$$('[required]',form).forEach(function(i){i.style.borderColor='';if(!i.value.trim()){i.style.borderColor='var(--pink)';bad=bad||i}});
     if(bad){bad.focus();return}
-    location.href='/bedankt/';
+    var key=form.getAttribute('data-key');
+    if(!key){location.href='/bedankt/';return}
+    var btn=form.querySelector('button[type=submit]'),txt=btn.innerHTML,old=form.querySelector('.form-err');
+    if(old&&old.parentNode)old.parentNode.removeChild(old);
+    btn.disabled=true;btn.textContent='Versturen...';
+    var data=new FormData(form);data.append('access_key',key);
+    if(data.get('naam'))data.set('name',data.get('naam'));
+    if(data.get('mail'))data.set('email',data.get('mail'));
+    fetch('https://api.web3forms.com/submit',{method:'POST',headers:{Accept:'application/json'},body:data})
+      .then(function(r){return r.json()})
+      .then(function(res){if(res&&res.success){location.href='/bedankt/'}else{throw 0}})
+      .catch(function(){
+        btn.disabled=false;btn.innerHTML=txt;
+        var p=document.createElement('p');p.className='form-err';
+        p.innerHTML='Versturen lukte niet. Stuur ons een <a href="https://wa.me/31638661729">WhatsApp</a> of bel <a href="tel:+31638661729">06 - 38 66 17 29</a>.';
+        btn.insertAdjacentElement('afterend',p);
+      });
   });
 
   // hero flakes (blue/pink particles)

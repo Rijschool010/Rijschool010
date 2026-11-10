@@ -9,6 +9,8 @@ const SRC = path.join(ROOT, 'src');
 
 const SITE = {
   name: 'Rijschool 010',
+  // Web3Forms access key (web3forms.com). Leeg = demo-modus: formulier gaat direct naar /bedankt/ zonder te versturen.
+  web3formsKey: '5aecdcbd-92b8-4082-9633-668010b3887a',
   domain: 'https://rijschool010.nl',
   phone: '06 - 38 66 17 29',
   phoneIntl: '+31638661729',
@@ -514,14 +516,22 @@ function contactSection({ title = 'Plan je proefles.', id = 'contact', vraag = f
           <div>${icon('cal')}<span><small>Lesdagen</small>Maandag t/m zaterdag</span></div>
         </div>
       </div>
-${vraag ? `      <form id="form" novalidate>
+${vraag ? `      <form id="form" novalidate data-key="${SITE.web3formsKey}">
+        <input type="hidden" name="subject" value="${vraag ? 'Nieuwe vraag via rijschool010.nl' : 'Nieuwe proeflesaanmelding via rijschool010.nl'}">
+        <input type="hidden" name="from_name" value="Website Rijschool 010">
+        <input type="hidden" name="formulier" value="${vraag ? 'Contact' : 'Proefles'}">
+        <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
         <div class="f"><label for="naam">Naam *</label><input id="naam" name="naam" required autocomplete="name"></div>
         <div class="f"><label for="tel">Telefoonnummer *</label><input id="tel" name="tel" type="tel" required autocomplete="tel"></div>
         <div class="f full"><label for="mail">E-mailadres</label><input id="mail" name="mail" type="email" autocomplete="email"></div>
         <div class="f full"><label for="bericht">Je vraag *</label><textarea id="bericht" name="bericht" rows="5" required placeholder="Waar kunnen we je mee helpen?"></textarea></div>
         <button class="btn btn-primary" type="submit">Verstuur vraag ${ARROW}</button>
         <p class="form-alt">Wil je een proefles plannen? <a href="/proefles/#aanmelden">Meld je hier aan</a>.</p>
-      </form>` : `      <form id="form" novalidate>
+      </form>` : `      <form id="form" novalidate data-key="${SITE.web3formsKey}">
+        <input type="hidden" name="subject" value="${vraag ? 'Nieuwe vraag via rijschool010.nl' : 'Nieuwe proeflesaanmelding via rijschool010.nl'}">
+        <input type="hidden" name="from_name" value="Website Rijschool 010">
+        <input type="hidden" name="formulier" value="${vraag ? 'Contact' : 'Proefles'}">
+        <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
         <div class="f"><label for="naam">Voor- en achternaam *</label><input id="naam" name="naam" required autocomplete="name"></div>
         <div class="f"><label for="tel">Telefoonnummer *</label><input id="tel" name="tel" type="tel" required autocomplete="tel"></div>
         <div class="f"><label for="mail">E-mailadres</label><input id="mail" name="mail" type="email" autocomplete="email"></div>

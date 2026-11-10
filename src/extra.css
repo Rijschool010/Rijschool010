@@ -318,3 +318,7 @@ a.chip{color:inherit}
   #reviews .review{flex:0 0 46%;margin:0;scroll-snap-align:start}
 }
 .hero h1 .line{padding-bottom:.12em;margin-bottom:-.12em}
+
+.hp{position:absolute!important;left:-9999px;width:1px;height:1px;opacity:0}
+.form-err{grid-column:1/-1;margin:6px 0 0;padding:12px 14px;border-radius:12px;background:rgba(236,72,153,.12);border:1px solid rgba(236,72,153,.4);font-size:.92rem}
+.form-err a{color:var(--text);text-decoration:underline}
