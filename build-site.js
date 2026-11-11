@@ -10,7 +10,7 @@ const SRC = path.join(ROOT, 'src');
 const SITE = {
   name: 'Rijschool 010',
   // Web3Forms access key (web3forms.com). Leeg = demo-modus: formulier gaat direct naar /bedankt/ zonder te versturen.
-  web3formsKey: '5aecdcbd-92b8-4082-9633-668010b3887a',
+  web3formsKey: 'e34090a8-9aae-49cb-bba7-0263ca2ecbed',
   domain: 'https://rijschool010.nl',
   phone: '06 - 38 66 17 29',
   phoneIntl: '+31638661729',
