@@ -11,7 +11,7 @@ const SITE = {
   name: 'Rijschool 010',
   // Web3Forms access key (web3forms.com). Leeg = demo-modus: formulier gaat direct naar /bedankt/ zonder te versturen.
   web3formsKey: 'e34090a8-9aae-49cb-bba7-0263ca2ecbed',
-  domain: 'https://rijschool010.nl',
+  domain: 'https://www.rijschool010.nl',
   phone: '06 - 38 66 17 29',
   phoneIntl: '+31638661729',
   wa: 'https://wa.me/31638661729',
@@ -25,7 +25,7 @@ const SITE = {
   reviews: 56,
   reviewsUrl: 'https://search.google.com/local/reviews?placeid=ChIJH_Xj-F5NxEcRL7QnIA8WCWc',
   writeReviewUrl: 'https://search.google.com/local/writereview?placeid=ChIJH_Xj-F5NxEcRL7QnIA8WCWc',
-  noindex: true, // demo: flip to false when the site goes live
+  noindex: false, // live sinds 2026-11-10 (bedankt en 404 houden per pagina noindex)
 };
 
 // les = losse les van 45 min. Pakketlessen zijn 90 min: los €120, in een pakket €115.
@@ -524,6 +524,7 @@ ${vraag ? `      <form id="form" novalidate data-key="${SITE.web3formsKey}">
         <div class="f"><label for="naam">Naam *</label><input id="naam" name="naam" required autocomplete="name"></div>
         <div class="f"><label for="tel">Telefoonnummer *</label><input id="tel" name="tel" type="tel" required autocomplete="tel"></div>
         <div class="f full"><label for="mail">E-mailadres</label><input id="mail" name="mail" type="email" autocomplete="email"></div>
+        <div class="f full"><label for="gevonden">Hoe heb je ons gevonden?</label><select id="gevonden" name="gevonden"><option value="">Kies een optie</option><option>Google</option><option>Google Maps</option><option>ChatGPT of andere AI</option><option>Instagram of TikTok</option><option>Facebook</option><option>Via vrienden of familie</option><option>Lesauto gezien</option><option>Anders</option></select></div>
         <div class="f full"><label for="bericht">Je vraag *</label><textarea id="bericht" name="bericht" rows="5" required placeholder="Waar kunnen we je mee helpen?"></textarea></div>
         <button class="btn btn-primary" type="submit">Verstuur vraag ${ARROW}</button>
         <p class="form-alt">Wil je een proefles plannen? <a href="/proefles/#aanmelden">Meld je hier aan</a>.</p>
@@ -544,6 +545,7 @@ ${vraag ? `      <form id="form" novalidate data-key="${SITE.web3formsKey}">
         </div>
         <div class="f"><label for="pakket">Pakket</label><select id="pakket" name="pakket"><option value="onbekend">Weet ik nog niet</option>${PACKS.map(p => `<option value="${p.id}">${p.name}: ${p.lessen} lessen, ${eur(p.prijs)}</option>`).join('')}<option value="los">Losse lessen</option></select></div>
         <div class="f"><label for="theorie">Heb je je theorie al? *</label><select id="theorie" name="theorie"><option>Ja</option><option>Nee, nog niet</option><option>Ik heb al een rijbewijs (opfris)</option></select></div>
+        <div class="f full"><label for="gevonden">Hoe heb je ons gevonden?</label><select id="gevonden" name="gevonden"><option value="">Kies een optie</option><option>Google</option><option>Google Maps</option><option>ChatGPT of andere AI</option><option>Instagram of TikTok</option><option>Facebook</option><option>Via vrienden of familie</option><option>Lesauto gezien</option><option>Anders</option></select></div>
         <div class="f full"><label for="contactvia">Hoe wil je benaderd worden?</label><select id="contactvia" name="contactvia"><option>WhatsApp</option><option>Gebeld worden</option><option>E-mail</option></select></div>
         <div class="f full"><label for="bericht">Beschikbaarheid of vraag</label><textarea id="bericht" name="bericht" rows="3" placeholder="Bijv. dinsdag en zaterdag, of: ik heb last van faalangst"></textarea></div>
         <button class="btn btn-primary" type="submit">Verstuur aanmelding ${ARROW}</button>
@@ -568,6 +570,8 @@ function serviceCards(slugs, { cls = 'card-grid', highlightFirst = false, en = f
   }).join('')}</div>`;
 }
 
+const metaDesc = t => { if (t.length <= 160) return t; const s = t.slice(0, 160); const i = s.lastIndexOf('. '); return i > 60 ? s.slice(0, i + 1) : s.slice(0, s.lastIndexOf(' ')) + '...'; };
+
 /* ---------- JSON-LD ---------- */
 const orgLd = {
   '@context': 'https://schema.org', '@type': 'DrivingSchool', name: SITE.name, url: SITE.domain + '/', telephone: SITE.phoneIntl, email: SITE.email,
@@ -583,7 +587,7 @@ const crumbLd = crumbs => ({ '@context': 'https://schema.org', '@type': 'Breadcr
 const faqLd = items => ({ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: items.map(([q, a]) => ({ '@type': 'Question', name: stripTags(q), acceptedAnswer: { '@type': 'Answer', text: stripTags(a) } })) });
 
 /* ---------- layout ---------- */
-function layout({ url, title, desc, body, crumbs, faq, lang = 'nl', extraLd = [] }) {
+function layout({ url, title, desc, body, crumbs, faq, lang = 'nl', extraLd = [], noindex = false }) {
   const lds = [orgLd, ...extraLd];
   if (crumbs) lds.push(crumbLd(crumbs));
   if (faq) lds.push(faqLd(faq));
@@ -594,7 +598,7 @@ function layout({ url, title, desc, body, crumbs, faq, lang = 'nl', extraLd = []
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(desc)}">
-${SITE.noindex ? '<meta name="robots" content="noindex, nofollow">' : ''}
+${SITE.noindex || noindex ? '<meta name="robots" content="noindex, nofollow">' : ''}
 <link rel="canonical" href="${SITE.domain}${url}">
 <meta property="og:type" content="website">
 <meta property="og:title" content="${esc(title)}">
@@ -632,8 +636,8 @@ const page = (url, opts) => out.push({ url, html: layout({ url, ...opts }) });
     .replace('{{PRICING}}', pricingSection())
     .replace('{{CTA}}', ctaBand());
   page('/', {
-    title: 'Rijschool 010 | Rijles automaat en schakel in Rhoon en Rotterdam',
-    desc: `Rijschool 010 geeft sinds ${SITE.since} rijles in automaat en schakel in Rhoon, Rotterdam, Barendrecht, Schiedam, Vlaardingen, Maassluis en Maasland. Specialist in faalangst. ${SITE.rating} sterren op Google.`,
+    title: 'Beste rijschool in Rhoon en Rotterdam | Rijles automaat en schakel, faalangst, spoedcursus en rijles in het Engels bij jou in de buurt | Rijschool 010',
+    desc: `Rijles in automaat en schakel in Rhoon, Rotterdam en omgeving. Sinds ${SITE.since}, specialist in faalangst en ${SITE.rating} sterren op Google. Plan je gratis proefles.`,
     body,
   });
 }
@@ -694,7 +698,7 @@ ${s.slug === 'proefles' ? contactSection({ title: 'Plan je proefles.', id: 'aanm
 </section>
 ${faqHtml(s.faq, { title: L.faqT, eyebrow: L.faqE, cls: 'alt' })}
 ${ctaBand({ title: L.cta, text: L.ctaT, primary: [L.ctaB, '/proefles/#aanmelden'], en })}`;
-  page(`/${s.slug}/`, { title: `${s.title} | Rijschool 010`, desc: stripTags(s.intro), body, crumbs, faq: s.faq, lang: s.lang || 'nl' });
+  page(`/${s.slug}/`, { title: s.lang === 'en' ? `${s.title} | Automatic or manual car | Rijschool 010` : `${s.title} | Automaat of schakel bij Rijschool 010, de rijschool voor Rhoon en Rotterdam`, desc: metaDesc(stripTags(s.intro)), body, crumbs, faq: s.faq, lang: s.lang || 'nl' });
 }
 
 // Location pages
@@ -742,7 +746,7 @@ for (const l of LOCATIONS) {
 </section>
 ${faqHtml(faq)}
 ${ctaBand({ title: `Rijles in ${l.name}?`, text: `Plan je proefles van 45 minuten. We halen je op in ${l.name}. Bij elk pakket is de proefles gratis en zit je examen erbij.` })}`;
-  page(`/rijschool-${l.slug}/`, { title: `Rijschool ${l.name} | Rijles automaat en schakel | Rijschool 010`, desc: `Rijles in ${l.name} bij Rijschool 010: automaat en schakel, lessen van 90 minuten, specialist in faalangst. Pakket met examen inbegrepen.`, body, crumbs, faq });
+  page(`/rijschool-${l.slug}/`, { title: `Beste rijschool in ${l.name} | Rijles automaat en schakel, faalangst en spoedcursus in ${l.name} en omgeving | Rijschool 010`, desc: `Rijles in ${l.name} bij Rijschool 010: automaat en schakel, lessen van 90 minuten, specialist in faalangst. Pakket met examen inbegrepen.`, body, crumbs, faq });
 }
 
 // Tarieven
@@ -977,7 +981,7 @@ ${contactSection({ title: 'Stel je vraag.', id: 'contact', vraag: true }).replac
     <h3>Welke gegevens we verwerken</h3>
     <p>Als je je aanmeldt via het formulier, WhatsApp, telefoon of e-mail, verwerken we de gegevens die je ons geeft: je naam, telefoonnummer, e-mailadres, postcode en woonplaats, en wat je ons vertelt over je beschikbaarheid en voorkeuren.</p>
     <h3>Waarvoor we ze gebruiken</h3>
-    <p>We gebruiken je gegevens alleen om contact met je op te nemen, je lessen en examen in te plannen en betalingen te verwerken. Voor het aanvragen van je praktijkexamen geven we de benodigde gegevens door aan het CBR.</p>
+    <p>We gebruiken je gegevens alleen om contact met je op te nemen, je lessen en examen in te plannen en betalingen te verwerken. Formulieren op deze website worden verstuurd via Web3Forms, die de gegevens alleen doorstuurt naar onze inbox. Voor het aanvragen van je praktijkexamen geven we de benodigde gegevens door aan het CBR.</p>
     <h3>Hoe lang we ze bewaren</h3>
     <p>We bewaren je gegevens niet langer dan nodig voor je lestraject en voor onze wettelijke administratieplicht.</p>
     <h3>Je rechten</h3>
@@ -992,11 +996,11 @@ ${contactSection({ title: 'Stel je vraag.', id: 'contact', vraag: true }).replac
 // Bedankt
 {
   const body = `${pageHero({ h1: 'Bedankt! <span class="grad-text">We hebben je bericht ontvangen.</span>', lead: 'We nemen binnen 24 uur persoonlijk contact met je op. In dat gesprek bespreken we de vervolgstappen en vertellen we je precies hoe alles verder werkt.', ctas: `<a href="${SITE.wa}" target="_blank" rel="noopener" class="btn btn-primary magnetic">Stuur alvast een WhatsApp ${ARROW}</a><a href="/" class="btn btn-ghost magnetic">Terug naar home</a>` })}`;
-  page('/bedankt/', { title: 'Bedankt voor je bericht | Rijschool 010', desc: 'Bedankt voor je bericht aan Rijschool 010.', body });
+  page('/bedankt/', { title: 'Bedankt voor je bericht | Rijschool 010', desc: 'Bedankt voor je bericht aan Rijschool 010.', body, noindex: true });
 }
 
 // 404
-out.push({ url: '/404.html', html: layout({ url: '/404.html', title: 'Pagina niet gevonden | Rijschool 010', desc: 'Deze pagina bestaat niet.', body: `<section class="nf"><div class="wrap"><div class="big grad-text">404</div><h1 class="h2">Deze afslag bestaat niet.</h1><p class="lead" style="margin:0 auto 30px">De pagina die je zoekt is er niet. Rij terug naar home of plan meteen je proefles.</p><div class="hero-ctas" style="justify-content:center"><a href="/" class="btn btn-primary">Naar home ${ARROW}</a><a href="/proefles/#aanmelden" class="btn btn-ghost">Gratis proefles</a></div></div></section>` }) });
+out.push({ url: '/404.html', html: layout({ url: '/404.html', noindex: true, title: 'Pagina niet gevonden | Rijschool 010', desc: 'Deze pagina bestaat niet.', body: `<section class="nf"><div class="wrap"><div class="big grad-text">404</div><h1 class="h2">Deze afslag bestaat niet.</h1><p class="lead" style="margin:0 auto 30px">De pagina die je zoekt is er niet. Rij terug naar home of plan meteen je proefles.</p><div class="hero-ctas" style="justify-content:center"><a href="/" class="btn btn-primary">Naar home ${ARROW}</a><a href="/proefles/#aanmelden" class="btn btn-ghost">Gratis proefles</a></div></div></section>` }) });
 
 /* ---------- write ---------- */
 const css = fs.readFileSync(path.join(SRC, 'site.css'), 'utf8') + '\n' + fs.readFileSync(path.join(SRC, 'extra.css'), 'utf8');

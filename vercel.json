@@ -1,0 +1,105 @@
+{
+  "trailingSlash": true,
+  "redirects": [
+    {
+      "source": "/home",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/automaat",
+      "destination": "/rijles-automaat/",
+      "permanent": true
+    },
+    {
+      "source": "/prijzen",
+      "destination": "/tarieven/",
+      "permanent": true
+    },
+    {
+      "source": "/aanmelden",
+      "destination": "/proefles/",
+      "permanent": true
+    },
+    {
+      "source": "/praktijk-examen",
+      "destination": "/tarieven/",
+      "permanent": true
+    },
+    {
+      "source": "/tussentijdse-toets",
+      "destination": "/tarieven/",
+      "permanent": true
+    },
+    {
+      "source": "/minimum-leeftijd",
+      "destination": "/rijles-vanaf-16-5-jaar/",
+      "permanent": true
+    },
+    {
+      "source": "/begeleiderspas-aanvragen",
+      "destination": "/rijles-vanaf-16-5-jaar/",
+      "permanent": true
+    },
+    {
+      "source": "/niemand-ophalen",
+      "destination": "/over-ons/",
+      "permanent": true
+    },
+    {
+      "source": "/privacyverklaring",
+      "destination": "/privacy/",
+      "permanent": true
+    },
+    {
+      "source": "/home/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/automaat/",
+      "destination": "/rijles-automaat/",
+      "permanent": true
+    },
+    {
+      "source": "/prijzen/",
+      "destination": "/tarieven/",
+      "permanent": true
+    },
+    {
+      "source": "/aanmelden/",
+      "destination": "/proefles/",
+      "permanent": true
+    },
+    {
+      "source": "/praktijk-examen/",
+      "destination": "/tarieven/",
+      "permanent": true
+    },
+    {
+      "source": "/tussentijdse-toets/",
+      "destination": "/tarieven/",
+      "permanent": true
+    },
+    {
+      "source": "/minimum-leeftijd/",
+      "destination": "/rijles-vanaf-16-5-jaar/",
+      "permanent": true
+    },
+    {
+      "source": "/begeleiderspas-aanvragen/",
+      "destination": "/rijles-vanaf-16-5-jaar/",
+      "permanent": true
+    },
+    {
+      "source": "/niemand-ophalen/",
+      "destination": "/over-ons/",
+      "permanent": true
+    },
+    {
+      "source": "/privacyverklaring/",
+      "destination": "/privacy/",
+      "permanent": true
+    }
+  ]
+}

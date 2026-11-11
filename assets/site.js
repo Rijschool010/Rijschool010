@@ -149,13 +149,13 @@
     for(var j=0;j<n;j++)P.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*2.6+.6,vy:Math.random()*.35+.1,vx:(Math.random()-.5)*.25,a:Math.random()*Math.PI*2,c:Math.random()<.55?'blue':'pink'});
     var mx=-999,my=-999;addEventListener('mousemove',function(e){var r=cv.getBoundingClientRect();mx=e.clientX-r.left;my=e.clientY-r.top});
     var visible=true;new IntersectionObserver(function(es){visible=es[0].isIntersecting}).observe(cv);
+    var cs=getComputedStyle(root),cb=cs.getPropertyValue('--blue').trim(),cp=cs.getPropertyValue('--pink').trim();
     (function loop(){
       requestAnimationFrame(loop);if(!visible)return;
-      var cs=getComputedStyle(root),cb=cs.getPropertyValue('--blue').trim(),cp=cs.getPropertyValue('--pink').trim();
       ctx.clearRect(0,0,W,H);
       P.forEach(function(p){
         p.a+=.01;p.y+=p.vy;p.x+=p.vx+Math.sin(p.a)*.3;
-        var dx=p.x-mx,dy=p.y-my,d=Math.hypot(dx,dy);if(d<110){p.x+=dx/d*1.6;p.y+=dy/d*1.6}
+        var dx=p.x-mx,dy=p.y-my,d=Math.hypot(dx,dy);if(d>0&&d<110){p.x+=dx/d*1.6;p.y+=dy/d*1.6}
         if(p.y>H+10){p.y=-10;p.x=Math.random()*W}if(p.x<-10)p.x=W+10;if(p.x>W+10)p.x=-10;
         ctx.globalAlpha=.25+Math.sin(p.a*2)*.2+.25;ctx.fillStyle=p.c==='blue'?cb:cp;
         ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill();
