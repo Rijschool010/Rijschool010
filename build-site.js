@@ -347,8 +347,8 @@ function navHtml(cur) {
 <header class="nav" id="nav">
   <div class="wrap bar">
     <a href="/" class="brand" aria-label="Rijschool 010 home">
-      <img class="logo-on-light" src="/img/logo-dark.webp" alt="Rijschool 010" width="185" height="38">
-      <img class="logo-on-dark" src="/img/logo-light.webp" alt="Rijschool 010" width="185" height="38">
+      <img class="logo-on-light" src="/img/logo-dark.webp" alt="Rijschool 010" width="192" height="42">
+      <img class="logo-on-dark" src="/img/logo-light.webp" alt="Rijschool 010" width="192" height="42">
     </a>
     <nav aria-label="Hoofdmenu">
       <ul>
@@ -386,12 +386,17 @@ function navHtml(cur) {
 }
 
 function footerHtml() {
-  return `<footer>
+  return `<section class="brand-band" aria-label="Rijschool 010">
+  <a href="/" aria-label="Rijschool 010 home"><img class="bb-logo" src="/img/logo-light.webp" alt="Rijschool 010" loading="lazy" width="913" height="200"></a>
+  <p class="bb-tag">Rijles in Rhoon, Rotterdam, Barendrecht en omgeving</p>
+  <div class="bb-pills"><a href="/rijles-automaat/">Automaat en schakel</a><a href="/rijles-faalangst/">Faalangst</a><a href="/spoedcursus/">Spoedcursus</a><a href="/driving-lessons-english/">Engelstalig</a></div>
+</section>
+<footer>
   <div class="wrap">
     <div class="foot">
       <div>
-        <a href="/" class="logo-card" aria-label="Rijschool 010 home"><img class="logo-on-light" src="/img/logo-dark.webp" alt="Rijschool 010" loading="lazy" width="210" height="43"><img class="logo-on-dark" src="/img/logo-light.webp" alt="Rijschool 010" loading="lazy" width="210" height="43"></a>
-        <p>Sinds ${SITE.since} rijles in automaat en schakel in Rhoon, Rotterdam en omgeving. Gespecialiseerd in faalangst en rijangst.</p>
+        <a href="/" class="logo-card" aria-label="Rijschool 010 home"><img class="logo-on-light" src="/img/logo-dark.webp" alt="Rijschool 010" loading="lazy" width="230" height="50"><img class="logo-on-dark" src="/img/logo-light.webp" alt="Rijschool 010" loading="lazy" width="230" height="50"></a>
+        <p>Sinds ${SITE.since} rijles in automaat en schakel in Rhoon, Rotterdam, Barendrecht en omgeving. Gespecialiseerd in faalangst en rijangst.</p>
         <div class="nap">
           <a href="tel:${SITE.phoneIntl}">${SITE.phone}</a>
           <a href="mailto:${SITE.email}">${SITE.email}</a>
@@ -610,7 +615,7 @@ ${SITE.noindex || noindex ? '<meta name="robots" content="noindex, nofollow">' :
 <link rel="apple-touch-icon" href="/img/icon-180.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,400;0,500;0,600;0,700;0,800;1,700;1,800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/site.css">
 ${lds.map(ld).join('\n')}
 </head>
@@ -883,7 +888,7 @@ ${ctaBand({ title: 'Durf jij het aan?', text: 'Plan je proefles met onze instruc
 </section>
 <section>
   <div class="wrap">
-    <div class="dakbord rv s"><img src="/img/dakbord.webp" alt="Dakbord Rijschool 010 met auto en motor" loading="lazy" width="1600" height="312"><p>Herken je ons dakbord? Dan zie je een van onze lesauto's.</p></div>
+    <div class="dakbord rv s"><img src="/img/dakbord.webp" alt="Dakbord Rijschool 010 met auto en motor" loading="lazy" width="1600" height="320"><p>Herken je ons dakbord? Dan zie je een van onze lesauto's.</p></div>
   </div>
 </section>
 <section class="alt">
