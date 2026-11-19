@@ -12,9 +12,9 @@ const SITE = {
   // Web3Forms access key (web3forms.com). Leeg = demo-modus: formulier gaat direct naar /bedankt/ zonder te versturen.
   web3formsKey: 'e34090a8-9aae-49cb-bba7-0263ca2ecbed',
   domain: 'https://www.rijschool010.nl',
-  phone: '06 - 38 66 17 29',
-  phoneIntl: '+31638661729',
-  wa: 'https://wa.me/31638661729',
+  phone: '06 - 53 65 92 09',
+  phoneIntl: '+31653659209',
+  wa: 'https://wa.me/31653659209',
   email: 'info@rijschool010.nl',
   street: 'Maansteen 13',
   zip: '3162 TB',

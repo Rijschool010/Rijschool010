@@ -134,7 +134,7 @@
       .catch(function(){
         btn.disabled=false;btn.innerHTML=txt;
         var p=document.createElement('p');p.className='form-err';
-        p.innerHTML='Versturen lukte niet. Stuur ons een <a href="https://wa.me/31638661729">WhatsApp</a> of bel <a href="tel:+31638661729">06 - 38 66 17 29</a>.';
+        p.innerHTML='Versturen lukte niet. Stuur ons een <a href="https://wa.me/31653659209">WhatsApp</a> of bel <a href="tel:+31653659209">06 - 53 65 92 09</a>.';
         btn.insertAdjacentElement('afterend',p);
       });
   });
